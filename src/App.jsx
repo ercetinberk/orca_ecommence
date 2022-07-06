@@ -27,7 +27,7 @@ const App = (props) => {
       setLoading(false);
     };
     renderPage();
-  }, []);
+  }, [props.actions]);
   return (
     <div>
       {loading ? (

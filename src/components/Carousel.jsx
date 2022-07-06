@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { connect } from "react-redux";
 import { KeyboardArrowLeftOutlined,KeyboardArrowRightOutlined } from "@material-ui/icons";
 import styled from "styled-components";
 import {colors} from "../res/values/values"
@@ -99,22 +100,22 @@ const Title = styled.span`
 `;
 
 //#endregion
-export default function Carousal() {
+function Carousal(props) {
   const [weboffers, setWebOffers] = useState([]);
   const [value, setValue] = useState(0);
   const navigate = useNavigate()
   const { height, width } = useWindowWidthAndHeight();
   useEffect(() => {
-    const getBanners = async () => {
-        let url = `http://localhost:3000/api/products/weboffers`;
+    const getWebOffers = async () => {
+        let url = `http://localhost:3000/api/products/weboffers?customerprice=${props.currentUser.customerpricegroup}`;
         await fetch(url)
           .then((res) => res.json())
           .then((res) => {
             setWebOffers(res.message.data);
           });
       }
-      getBanners()
-  }, []);
+      getWebOffers()
+  }, [props.currentUser]);
 
   const moveBehind = () => {
     console.log(width);
@@ -159,3 +160,9 @@ export default function Carousal() {
     </BodyDiv>
   );
 }
+function mapStateToProps(state) {
+  return {
+    currentUser: state.currentUserReducer,
+  };
+}
+export default connect(mapStateToProps, null)(Carousal);

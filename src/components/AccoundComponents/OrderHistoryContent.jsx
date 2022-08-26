@@ -77,7 +77,7 @@ function OrderHistoryContent(props) {
   }, [props.document_no]);
   const getPendingOrders = async () => {
     const access_token = localStorage.getItem("access_token");
-    let url = "http://localhost:3000/api/order/pendingorders/";
+    let url = "https://orca-ecommerce-api.herokuapp.com/api/order/pendingorders/";
     await fetch(url, {
       method: "GET",
       headers: {
@@ -96,7 +96,7 @@ function OrderHistoryContent(props) {
   };
   const getCompletedOrders = async () => {
     const access_token = localStorage.getItem("access_token");
-    let url = "http://localhost:3000/api/order/completedorders/";
+    let url = "https://orca-ecommerce-api.herokuapp.com/api/order/completedorders/";
     await fetch(url, {
       method: "GET",
       headers: {
@@ -115,7 +115,7 @@ function OrderHistoryContent(props) {
   };
   const getSelectedOrderLines = async () => {
     const access_token = localStorage.getItem("access_token");
-    let url = `http://localhost:3000/api/order/pendingorders/${props.document_no}/lines`;
+    let url = `https://orca-ecommerce-api.herokuapp.com/api/order/pendingorders/${props.document_no}/lines`;
     await fetch(url, {
       method: "GET",
       headers: {
@@ -134,7 +134,7 @@ function OrderHistoryContent(props) {
   };
   const getSelectedCompletedOrderLines = async () => {
     const access_token = localStorage.getItem("access_token");
-    let url = `http://localhost:3000/api/order/completedorders/${props.document_no}/lines`;
+    let url = `https://orca-ecommerce-api.herokuapp.com/api/order/completedorders/${props.document_no}/lines`;
     await fetch(url, {
       method: "GET",
       headers: {

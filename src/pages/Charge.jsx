@@ -36,7 +36,7 @@ const Charge = ({totalPayment,confirmOrderWithPayment,user}) => {
   useEffect(() => {
     const getClinetSecret = async () => {
       try {
-        let url = "http://localhost:3000/api/charge/secure";
+        let url = "https://orca-ecommerce-api.herokuapp.com/api/charge/secure";
         await fetch(url, {
           method: "POST",
           headers: {
@@ -70,7 +70,7 @@ const Charge = ({totalPayment,confirmOrderWithPayment,user}) => {
   const cancelPayment = async () => {
     try {
       
-      let url = "http://localhost:3000/api/charge/cancel";
+      let url = "https://orca-ecommerce-api.herokuapp.com/api/charge/cancel";
       await fetch(url, {
         method: "POST",
         headers: {
@@ -80,7 +80,6 @@ const Charge = ({totalPayment,confirmOrderWithPayment,user}) => {
       })
         .then((res) => res.json())
         .then((res) => {
-          console.log(res);
         })
         .catch((err) => {
           let error = JSON.parse(err.message);

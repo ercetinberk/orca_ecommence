@@ -9,7 +9,7 @@ export const colors={
 }
 export const STRIPE_KEY="pk_test_51L3ElqA2ViOJ9APC3pEByGMiNNF0Ir9FqKERDjIJyz9hw4nv3wOLoOX2w4MqOnDPBW4YdpXnF1ei3kf14nHB76MS00vJ9XmKRe"
 
-
+export const API_URL='https://orca-ecommerce-api.herokuapp.com/api'
 
 
 

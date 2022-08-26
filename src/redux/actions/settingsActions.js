@@ -6,7 +6,7 @@ export function getAllSettingsSuccess(settings) {
 
 export function getSettings() {
   return function (dispatch) {
-    let url = "http://localhost:3000/api/settings";
+    let url = "https://orca-ecommerce-api.herokuapp.com/api/settings";
     return fetch(url)
       .then((res) => res.json())
       .then((res) => {

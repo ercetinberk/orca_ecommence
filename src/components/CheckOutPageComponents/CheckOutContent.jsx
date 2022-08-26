@@ -108,7 +108,7 @@ function CheckOutContent(props) {
     //console.log(user);
     //await props.actions.checkOutOrder(user)
     const access_token = localStorage.getItem("access_token");
-    let url = "http://localhost:3000/api/cart/checkout";
+    let url = "https://orca-ecommerce-api.herokuapp.com/api/cart/checkout";
     await fetch(url, {
       method: "POST",
       headers: {
@@ -119,7 +119,6 @@ function CheckOutContent(props) {
     })
       .then((res) => res.json())
       .then((res) => {
-        console.log(res);
         if(res.success)  
           navigate('/')  
         else{
@@ -149,7 +148,7 @@ function CheckOutContent(props) {
     //console.log(user);
     //await props.actions.checkOutOrder(user)
     const access_token = localStorage.getItem("access_token");
-    let url = "http://localhost:3000/api/cart/checkout";
+    let url = "https://orca-ecommerce-api.herokuapp.com/api/cart/checkout";
     await fetch(url, {
       method: "POST",
       headers: {
@@ -160,7 +159,6 @@ function CheckOutContent(props) {
     })
       .then((res) => res.json())
       .then((res) => {
-        console.log(res);
         if(res.success)  
           navigate('/route=account/success')   
         else{

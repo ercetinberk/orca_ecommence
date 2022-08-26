@@ -206,7 +206,7 @@ const Autocomplete = (props) => {
     */
   };
   const getSearchProductsProduct = async (filter) => {
-    let url = `http://localhost:3000/api/products/search?filter=${filter}`
+    let url = `https://orca-ecommerce-api.herokuapp.com/api/products/search?filter=${filter}`
     await fetch(url)
       .then((res) => res.json())
       .then((res) => {

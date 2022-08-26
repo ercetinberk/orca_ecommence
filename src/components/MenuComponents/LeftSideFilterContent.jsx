@@ -89,8 +89,6 @@ function LeftSideFilterContent(props) {
     setIsActive(!isActive) 
   }
   const selectedSubItem = (item)=>{
-    console.log(item);
-    //(selectedItem===item.code) ? setSelectItem('') : setSelectItem(item.code)
     if(data.type==="ProductGroup"){
       (item.code === productid || item.code === brand || item.code === country) ? 
       navigate(`/route=search?categoryid=${data.parentid}${filter ? `&filter=${filter}` : ''}${brand ? `&brand=${brand}` : ''}${country ? `&country=${country}` : ''}`) : 

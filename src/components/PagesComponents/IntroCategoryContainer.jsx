@@ -2,6 +2,7 @@
 import styled from "styled-components";
 import {colors} from "../../res/values/values"
 import useWindowWidthAndHeight from "../../utilities/hooks/useWindowWidthAndHeight";
+import { useNavigate } from "react-router-dom";
 const Container = styled.div`
     display:flex ; 
     flex:1 ;
@@ -46,21 +47,24 @@ const Title = styled.span`
 `;
 function IntroCategoryContainer() {
   const { width } = useWindowWidthAndHeight();
+  const navigate = useNavigate();
+  const rootCategory =(catId)=>{
+     navigate(`/route=search?${catId ? `&categoryid=${catId}` : ''}`) 
+  }
   if (width < 768) {
     return(
       <Container>
           <div style={{display:"flex",justifyContent:"center",alignItems:"center"}}>
               <Title>OUR PRODUCTS</Title>
           </div>
-          <Category><Image src={`./catalog/Categories/CAN-JAR-PRODUCTS.jpg`}  ></Image></Category>
-          <Category><Image src={`./catalog/Categories/CONFECTIONARY0DNUTS-SEEDS-.jpg`}  ></Image></Category>
-          <Category><Image src={`./catalog/Categories/DAIRY-CHILLED.jpg`}  ></Image></Category>
-          <Category><Image src={`./catalog/Categories/DRINKS-BEVERAGES.jpg`}  ></Image></Category>
-          <Category><Image src={`./catalog/Categories/FROZEN-PRODUCTS.jpg`}  ></Image></Category>
-          <Category><Image src={`./catalog/Categories/PASTA-NOODLES-BREAD0DGRAINS-FLOURS.jpg`}  ></Image></Category>
-          <Category><Image src={`./catalog/Categories/POULTRY-MEAT-FISH.jpg`}  ></Image></Category>
-          <Category><Image src={`./catalog/Categories/SEASONING-HERBS-0DOTHER-AMBIENT.jpg`}  ></Image></Category>
-          <Category><Image src={`./catalog/Categories/TEA-COFFEE-INSTANT-DRINKS.jpg`}  ></Image></Category>
+          <Category onClick={()=>rootCategory(50000)}><Image src={`./catalog/Categories/CAN-JAR-PRODUCTS.jpg`}  ></Image></Category>
+          <Category onClick={()=>rootCategory(50000)}><Image src={`./catalog/Categories/CONFECTIONARY0DNUTS-SEEDS-.jpg`}  ></Image></Category>
+          <Category onClick={()=>rootCategory(50000)}><Image src={`./catalog/Categories/DAIRY-CHILLED.jpg`}  ></Image></Category>
+          <Category onClick={()=>rootCategory(50000)}><Image src={`./catalog/Categories/FROZEN-PRODUCTS.jpg`}  ></Image></Category>
+          <Category onClick={()=>rootCategory(50000)}><Image src={`./catalog/Categories/PASTA-NOODLES-BREAD0DGRAINS-FLOURS.jpg`}  ></Image></Category>
+          <Category onClick={()=>rootCategory(50000)}><Image src={`./catalog/Categories/POULTRY-MEAT-FISH.jpg`}  ></Image></Category>
+          <Category onClick={()=>rootCategory(50000)}><Image src={`./catalog/Categories/SEASONING-HERBS-0DOTHER-AMBIENT.jpg`}  ></Image></Category>
+          <Category onClick={()=>rootCategory(50000)}><Image src={`./catalog/Categories/TEA-COFFEE-INSTANT-DRINKS.jpg`}  ></Image></Category>
       </Container>
     )
   }else{
@@ -70,19 +74,19 @@ function IntroCategoryContainer() {
               <Title>OUR PRODUCTS</Title>
           </div>
         <Row>
-            <Category><Image src={`./catalog/Categories/CAN-JAR-PRODUCTS.jpg`}  ></Image></Category>
-            <Category><Image src={`./catalog/Categories/CONFECTIONARY0DNUTS-SEEDS-.jpg`}  ></Image></Category>
-            <Category><Image src={`./catalog/Categories/DAIRY-CHILLED.jpg`}  ></Image></Category>
+            <Category onClick={()=>rootCategory(50000)}><Image src={`./catalog/Categories/CAN-JAR-PRODUCTS.jpg`}  ></Image></Category>
+            <Category onClick={()=>rootCategory(50000)}><Image src={`./catalog/Categories/CONFECTIONARY0DNUTS-SEEDS-.jpg`}  ></Image></Category>
+            <Category onClick={()=>rootCategory(50000)}><Image src={`./catalog/Categories/DAIRY-CHILLED.jpg`}  ></Image></Category>
         </Row>
         <Row>
-            <Category><Image src={`./catalog/Categories/DRINKS-BEVERAGES.jpg`}  ></Image></Category>
-            <Category><Image src={`./catalog/Categories/FROZEN-PRODUCTS.jpg`}  ></Image></Category>
-            <Category><Image src={`./catalog/Categories/PASTA-NOODLES-BREAD0DGRAINS-FLOURS.jpg`}  ></Image></Category>
+            <Category onClick={()=>rootCategory(50000)}><Image src={`./catalog/Categories/DRINKS-BEVERAGES.jpg`}  ></Image></Category>
+            <Category onClick={()=>rootCategory(50000)}><Image src={`./catalog/Categories/FROZEN-PRODUCTS.jpg`}  ></Image></Category>
+            <Category onClick={()=>rootCategory(50000)}><Image src={`./catalog/Categories/PASTA-NOODLES-BREAD0DGRAINS-FLOURS.jpg`}  ></Image></Category>
         </Row>
         <Row>
-            <Category><Image src={`./catalog/Categories/POULTRY-MEAT-FISH.jpg`}  ></Image></Category>
-            <Category><Image src={`./catalog/Categories/SEASONING-HERBS-0DOTHER-AMBIENT.jpg`}  ></Image></Category>
-            <Category><Image src={`./catalog/Categories/TEA-COFFEE-INSTANT-DRINKS.jpg`}  ></Image></Category>
+            <Category onClick={()=>rootCategory(50000)}><Image src={`./catalog/Categories/POULTRY-MEAT-FISH.jpg`}  ></Image></Category>
+            <Category onClick={()=>rootCategory(50000)}><Image src={`./catalog/Categories/SEASONING-HERBS-0DOTHER-AMBIENT.jpg`}  ></Image></Category>
+            <Category onClick={()=>rootCategory(50000)}><Image src={`./catalog/Categories/TEA-COFFEE-INSTANT-DRINKS.jpg`}  ></Image></Category>
         </Row>
       </Container>
     )

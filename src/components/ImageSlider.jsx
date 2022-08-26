@@ -61,7 +61,7 @@ function ImageSlider(props) {
   const [timeId,setTimeId]=useState("")
   useEffect(() => {
     const getBanners = async () => {
-      let url = "http://localhost:3000/api/banners";
+      let url = "https://orca-ecommerce-api.herokuapp.com/api/banners";
       await fetch(url)
         .then((res) => res.json())
         .then((res) => {

@@ -138,7 +138,7 @@ function RegisterForm(props) {
         telephone: values.telephone,
         password: values.password,
       };
-      let url = "http://localhost:3000/api/auth/register";
+      let url = "https://orca-ecommerce-api.herokuapp.com/api/auth/register";
       fetch(url, {
         method: "POST",
         headers: { "content-type": "application/json" },

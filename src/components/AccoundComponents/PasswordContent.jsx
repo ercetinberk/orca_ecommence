@@ -98,7 +98,7 @@ function PasswordContent(props) {
             password:password
         }
         const access_token = localStorage.getItem("access_token");
-        let url = "http://localhost:3000/api/auth/changePassword";
+        let url = "https://orca-ecommerce-api.herokuapp.com/api/auth/changePassword";
         await fetch(url, {
           method: "POST",
           headers: {
@@ -109,7 +109,6 @@ function PasswordContent(props) {
         })
           .then((res) => res.json())
           .then((res) => {
-            console.log(res);
             navigate("/route=account/edit")
           })
           . catch((err) => {

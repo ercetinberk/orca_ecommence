@@ -11,14 +11,32 @@ import { bindActionCreators } from "redux";
 import * as productActions from "../redux/actions/productActions";
 import * as userActions from "../redux/actions/userActions";
 import * as settingsActions from "../redux/actions/settingsActions";
-const Container = styled.div``;
+import CircularProgress from '@mui/material/CircularProgress';
+const Container = styled.div`
+`;
+const ProductView = styled.div`
+  min-height: 40vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  transition: all 0.2s ease;
+`;
+const ContainerLoading = styled.div`
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  margin: 2rem 0.5rem;
+  align-items: center;
+  min-height: 40vw;
+`;
 function Card(props) {
     const [loading,setLoading]=useState(true)
     const [currentProduct,setCurrentProduct]=useState({})
     let params = useParams();
   useEffect(()=>{
     const getProduct = async () => {
-      let url = `http://localhost:3000/api/products/card/${params.productid}`
+      let url = `https://orca-ecommerce-api.herokuapp.com/api/products/card/${params.productid}`
       await fetch(url)
         .then((res) => res.json())
         .then((res) => {
@@ -46,17 +64,19 @@ function Card(props) {
   },[])
   return (
     <Container>
+      <Header />
+      <MenuBar />
+      <Announcement />
       {(!loading) ? 
-        <Container>
-          <Header />
-          <MenuBar />
-          <Announcement />
+        <ProductView>
            <CardContent key={currentProduct.product_id} product={currentProduct} />
-          <Footer />
-        </Container>
+        </ProductView>
         :
-        <Container/>
+        <ContainerLoading>
+          <CircularProgress size={40} thickness={4}/>
+        </ContainerLoading>
       }
+      <Footer />
     </Container>
   );
 }

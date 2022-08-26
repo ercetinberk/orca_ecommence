@@ -11,6 +11,7 @@ const WhyUsDiv = styled.div`
   justify-content: space-between;
   background-color: #eaeaea !important ;
   padding: 40px 80px;
+  min-height: 50vh;
   & p {
     color: black;
     font-family: "Poppins", sans-serif;

@@ -1,19 +1,18 @@
 import { Button, ButtonGroup } from "@material-ui/core";
 import { Add, Remove } from "@material-ui/icons";
 import styled from "styled-components";
-import { useState, useEffect,useRef } from "react";
+import { useState, useEffect, useRef } from "react";
 import { colors } from "../../res/values/values";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import * as cartActions from "../../redux/actions/cartActions";
 import CartAccordionMenu from "../MenuComponents/CartAccordionMenu";
 import { useNavigate } from "react-router-dom";
-import CircularProgress from '@mui/material/CircularProgress';
-import OrcaModal from "../Modal/OrcaModal"
+import CircularProgress from "@mui/material/CircularProgress";
+import OrcaModal from "../Modal/OrcaModal";
 //#region styles
 
 const Container = styled.div`
-  min-height: 40vw; 
   margin: 20px;
   display: flex;
   flex-direction: column;
@@ -33,7 +32,7 @@ const Row = styled.div`
   flex-direction: column;
   justify-content: flex-start;
   padding: 10px;
-  margin-top:10px ;
+  margin-top: 10px;
   @media only screen and (min-width: 767px) {
     flex-direction: row;
   }
@@ -53,7 +52,7 @@ const Image = styled.img`
 
 const Details = styled.div`
   text-align: center;
-  align-items:center;
+  align-items: center;
   display: flex;
   flex-direction: column;
   flex: 1;
@@ -61,7 +60,7 @@ const Details = styled.div`
   width: 100%;
   @media only screen and (min-width: 768px) {
     text-align: start;
-    align-items:flex-start;
+    align-items: flex-start;
   }
 `;
 
@@ -119,7 +118,7 @@ const Price = styled.h4`
 const CartActions = styled.div`
   display: flex;
   flex-direction: row;
-  width:95% ;
+  width: 95%;
   padding: 10px;
   height: 2.5rem;
 `;
@@ -130,7 +129,7 @@ const QtyInput = styled.input`
   border-radius: 2px;
   margin-right: 5px;
   font-size: 0.9rem;
-  width:100% ;
+  width: 100%;
   color: ${colors.primaryColor};
   text-align: center;
   @media only screen and (min-width: 768px) {
@@ -148,32 +147,30 @@ const CartInfo = styled.div`
   color: white;
   font-size: 14px;
   font-weight: 200;
-  margin-bottom:10px ;
+  margin-bottom: 10px;
 `;
 const DeliveryMethodDiv = styled.div`
   align-items: center;
-  width:20rem ;
+  width: 20rem;
   & div:hover {
-    background-color:  ${colors.primaryColor};
+    background-color: ${colors.primaryColor};
   }
 `;
 const WaitDiv = styled.div`
   align-items: center;
-  justify-content:center ;
-
+  justify-content: center;
 `;
 const DeliveryMethodButton = styled.div`
   font-size: 1.2rem;
   font-weight: 600;
   letter-spacing: 1px;
   align-items: center;
-  text-align:center ;
+  text-align: center;
   color: ${colors.whiteColor};
-  margin:1rem ;
+  margin: 1rem;
   padding: 5px;
   margin-top: 5px;
-  background-color:${colors.lightcolor} ;
-  
+  background-color: ${colors.lightcolor};
 `;
 //#endregion
 
@@ -190,21 +187,23 @@ function CardContent(props) {
   const inputRef = useRef(null);
 
   const [delMethodQty, setDelMethodQty] = useState(0);
-  const [deliveryMethod, setDeliveryMethod] = useState('');
+  const [deliveryMethod, setDeliveryMethod] = useState("");
 
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => {
     setOpen(false);
-    (disableValue) && setDisabled(false)
-  }
-  let addProductMethod = ''
+    disableValue && setDisabled(false);
+  };
+  let addProductMethod = "";
   //#endregion
 
   useEffect(() => {
     if (props.categories.length > 0) {
       let cartItem = props.cart.find((c) => c.itemno === props.product.itemno);
-      (props.cart.length > 0 )  ? setDeliveryMethod(props.cart[0].deliverymethod) : setDeliveryMethod('')
+      props.cart.length > 0
+        ? setDeliveryMethod(props.cart[0].deliverymethod)
+        : setDeliveryMethod("");
       if (cartItem) setqtyValue(cartItem.quantity);
       else setqtyValue(0);
       let l_accordionData = [];
@@ -230,46 +229,44 @@ function CardContent(props) {
         );
         setProductSubCategory(subCat);
       }
-      setLoading(false)
+      setLoading(false);
     }
   }, [props]);
   const onButtonClickHandler = (quantity) => {
     const access_token = localStorage.getItem("access_token");
-    if(access_token){
-      addProductMethod='onClick'
-      if(deliveryMethod===''){
-        setDelMethodQty(quantity)
-        handleOpen()
-      }else{
-        addProductForButtonClick(quantity,deliveryMethod)
+    if (access_token) {
+      addProductMethod = "onClick";
+      if (deliveryMethod === "") {
+        setDelMethodQty(quantity);
+        handleOpen();
+      } else {
+        addProductForButtonClick(quantity, deliveryMethod);
       }
-    }else
-      navigate('/route=account/login')
-    
+    } else navigate("/route=account/login");
   };
-  const addProductForButtonClick = (quantity,method) =>{
+  const addProductForButtonClick = (quantity, method) => {
     if (quantity === -1) {
       if (qtyValue > 1) {
         props.actions.addCartApi({
           product: props.product,
           quantity: -1,
-          deliveryMethod:method
+          deliveryMethod: method,
         });
       } else if (qtyValue === 1) {
         props.actions.addCartApi({
           product: props.product,
           quantity: 0,
-          deliveryMethod:method
+          deliveryMethod: method,
         });
       }
     } else {
       props.actions.addCartApi({
         product: props.product,
         quantity: 1,
-        deliveryMethod:method
+        deliveryMethod: method,
       });
     }
-  }
+  };
   const onChangeHandler = async (event) => {
     let name = event.target.name;
     let value = event.target.value;
@@ -277,37 +274,43 @@ function CardContent(props) {
       case "qtyinput":
         const access_token = localStorage.getItem("access_token");
         if (access_token) {
-          addProductMethod='onChangeHandler'
+          addProductMethod = "onChangeHandler";
           if (value !== "") {
-            let newQty=parseInt(value)
-            let cartItem = props.cart.find((c) => c.itemno === props.product.itemno);
+            let newQty = parseInt(value);
+            let cartItem = props.cart.find(
+              (c) => c.itemno === props.product.itemno
+            );
             if (cartItem) {
               if (newQty === 0 || newQty < 0) {
-                setDisabled(true)
+                setDisabled(true);
                 await props.actions.removeFromCart(cartItem.id);
-                setDisabled(false)
-                inputRef.current.focus()
+                setDisabled(false);
+                inputRef.current.focus();
               } else {
-                setDisabled(true)
-                await props.actions.updateCartItem({cartItem: cartItem,quantity: parseInt(newQty)});
-                setDisabled(false)
-                inputRef.current.focus()
+                setDisabled(true);
+                await props.actions.updateCartItem({
+                  cartItem: cartItem,
+                  quantity: parseInt(newQty),
+                });
+                setDisabled(false);
+                inputRef.current.focus();
               }
             } else {
-              if (newQty > 0){
-                if(deliveryMethod===''){
-                  setDelMethodQty(parseInt(newQty))
-                  handleOpen()
-                }else{
-                  addProductForOnChangeHandler(parseInt(newQty),deliveryMethod)
+              if (newQty > 0) {
+                if (deliveryMethod === "") {
+                  setDelMethodQty(parseInt(newQty));
+                  handleOpen();
+                } else {
+                  addProductForOnChangeHandler(
+                    parseInt(newQty),
+                    deliveryMethod
+                  );
                 }
+              } else {
+                setqtyValue(0);
+                setDisabled(false);
+                inputRef.current.focus();
               }
-              else{
-                setqtyValue(0)
-                setDisabled(false)
-                inputRef.current.focus()
-              }
-                
             }
           } else {
             setqtyValue("");
@@ -319,36 +322,46 @@ function CardContent(props) {
       // code block
     }
   };
-  const addProductForOnChangeHandler = async (quantity,deliveryMethod) =>{
-    setDisabled(true)
-    await props.actions.addCartApi({product: props.product,quantity,deliveryMethod});
-    setDisabled(false)
-    inputRef.current.focus()
-  }
-  const changeDeliveryMethod =(method)=>{
-    (addProductMethod==='onClick') ? addProductForButtonClick(delMethodQty,method) : addProductForOnChangeHandler(delMethodQty,method)
-    handleClose()
-  }
+  const addProductForOnChangeHandler = async (quantity, deliveryMethod) => {
+    setDisabled(true);
+    await props.actions.addCartApi({
+      product: props.product,
+      quantity,
+      deliveryMethod,
+    });
+    setDisabled(false);
+    inputRef.current.focus();
+  };
+  const changeDeliveryMethod = (method) => {
+    addProductMethod === "onClick"
+      ? addProductForButtonClick(delMethodQty, method)
+      : addProductForOnChangeHandler(delMethodQty, method);
+    handleClose();
+  };
   return (
-    <Container qtyValue={qtyValue}>
-      <OrcaModal isOpen={open} onClose={handleClose}>
-        <DeliveryMethodDiv>
-            <DeliveryMethodButton onClick={()=>changeDeliveryMethod('Delivery')}>Delivery </DeliveryMethodButton>
-            <DeliveryMethodButton onClick={()=>changeDeliveryMethod('Collection')} >Collection </DeliveryMethodButton>
-        </DeliveryMethodDiv>
-      </OrcaModal>
-      <OrcaModal isOpen={disableValue} onClose={()=>setDisabled(false)}>
-        <WaitDiv>
-              <CircularProgress
-              size={40}
-              thickness={4}
-        
-            />
-           <p>Please Wait ...</p>
-        </WaitDiv>
-      </OrcaModal>
+    <Container>
       {!loading ? (
-        <div>
+        <Container>
+          <OrcaModal isOpen={open} onClose={handleClose}>
+            <DeliveryMethodDiv>
+              <DeliveryMethodButton
+                onClick={() => changeDeliveryMethod("Delivery")}
+              >
+                Delivery{" "}
+              </DeliveryMethodButton>
+              <DeliveryMethodButton
+                onClick={() => changeDeliveryMethod("Collection")}
+              >
+                Collection{" "}
+              </DeliveryMethodButton>
+            </DeliveryMethodDiv>
+          </OrcaModal>
+          <OrcaModal isOpen={disableValue} onClose={() => setDisabled(false)}>
+            <WaitDiv>
+              <CircularProgress size={40} thickness={4} />
+              <p>Please Wait ...</p>
+            </WaitDiv>
+          </OrcaModal>
           <Row>
             <BreadCrumbText
               onClick={() => {
@@ -357,9 +370,30 @@ function CardContent(props) {
             >
               HOME
             </BreadCrumbText>
-            {(productCategory.code) && <BreadCrumbText onClick={() => {navigate("/route=search?categoryid=" + productCategory.code);}}>{productCategory.description}</BreadCrumbText>} 
-            {(productSubCategory.code) &&  <BreadCrumbText onClick={() => { navigate( `/route=search?categoryid=${productCategory.code}&productid=${productSubCategory.code}`);}} > {productSubCategory.description} </BreadCrumbText>}
-            <BreadCrumbText style={{color:"black"}}>{props.product.description}</BreadCrumbText>
+            {productCategory.code && (
+              <BreadCrumbText
+                onClick={() => {
+                  navigate("/route=search?categoryid=" + productCategory.code);
+                }}
+              >
+                {productCategory.description}
+              </BreadCrumbText>
+            )}
+            {productSubCategory.code && (
+              <BreadCrumbText
+                onClick={() => {
+                  navigate(
+                    `/route=search?categoryid=${productCategory.code}&productid=${productSubCategory.code}`
+                  );
+                }}
+              >
+                {" "}
+                {productSubCategory.description}{" "}
+              </BreadCrumbText>
+            )}
+            <BreadCrumbText style={{ color: "black" }}>
+              {props.product.description}
+            </BreadCrumbText>
           </Row>
           <Row>
             <Image src={`/${props.product.image}`} alt="cart_image" />
@@ -372,7 +406,9 @@ function CardContent(props) {
                 <Text>Unit Size : {props.product.unitsize}</Text>
                 <Text>Vat %: {props.product.vat}</Text>
                 <Text>Stock : {props.product.stockqty}</Text>
-                {props.settings.pricevisible && <Price>£ {props.product.unitprice}</Price>} 
+                {props.settings.pricevisible && (
+                  <Price>£ {props.product.unitprice}</Price>
+                )}
               </Details>
               <CartActions>
                 <QtyInput
@@ -421,10 +457,9 @@ function CardContent(props) {
           {accordionData.map((item) => {
             return <CartAccordionMenu key={item.title} item={item} />;
           })}
-        </div>
+        </Container>
       ) : (
-        <div>
-        </div>
+        <Container></Container>
       )}
     </Container>
   );
@@ -442,7 +477,7 @@ function mapStateToProps(state) {
   return {
     cart: state.cartActionReducer,
     categories: state.categoryListReducer,
-    settings: state.settingReducer
+    settings: state.settingReducer,
   };
 }
 export default connect(mapStateToProps, mapDispatchToProps)(CardContent);

@@ -15,7 +15,7 @@ export function getProductsSuccessDataCount(dataCount) {
 }
 export function getProducts(catId, productid,filter, page, rowsPerPage,user,brand,country) {
   return function (dispatch) {
-    let url = "http://localhost:3000/api/products";
+    let url = "https://orca-ecommerce-api.herokuapp.com/api/products";
   
       url+=`?search=orca${catId ? `&itemcategory=${catId}` : ''}`+
       `${productid ? `&productgroup=${productid}` : ''}`+
@@ -36,7 +36,7 @@ export function getProducts(catId, productid,filter, page, rowsPerPage,user,bran
 }
 export function getFilterProducts(catId, productid,filter, page, rowsPerPage,user,brand,country) {
   return function (dispatch) {
-    let url = "http://localhost:3000/api/products";
+    let url = "https://orca-ecommerce-api.herokuapp.com/api/products";
     if (filter)
       url += `?filter=${filter}&page=${page}&rowsPerPage=${rowsPerPage}&customerprice=${user.customerpricegroup}`;
     else url += `?page=${page}&rowsPerPage=${rowsPerPage}&customerprice=${user.customerpricegroup}`;
@@ -60,7 +60,7 @@ export function getAllSearchProductsSuccess(products) {
 
 export function getSearchProducts() {
   return function (dispatch) {
-    let url = "http://localhost:3000/api/products";
+    let url = "https://orca-ecommerce-api.herokuapp.com/api/products";
     return fetch(url)
       .then((res) => res.json())
       .then((res) => dispatch(getAllSearchProductsSuccess(res.message.data)));

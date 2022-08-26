@@ -7,7 +7,7 @@ import IntroContent from "../components/PagesComponents/IntroContent";
 const Container = styled.div``;
 const Intro = () => {
   const sendMail = async (values)=>{
-    let url = "http://localhost:3000/api/mail";
+    let url = "https://orca-ecommerce-api.herokuapp.com/api/mail";
     let rv = false
     await fetch(url, {
       method: "POST",

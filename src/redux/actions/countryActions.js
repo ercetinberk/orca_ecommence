@@ -6,7 +6,7 @@ export function getAllCounties(countries) {
 
 export function getCountryList() {
   return function (dispatch) {
-    let url = "http://localhost:3000/api/region";
+    let url = "https://orca-ecommerce-api.herokuapp.com/api/region";
     return fetch(url)
       .then((res) => res.json())
       .then((res) => { dispatch(getAllCounties(res.message.data)); });

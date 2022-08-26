@@ -6,7 +6,7 @@ export function getAllCategoriesSuccess(categories){
 
 export function getCategories(){
     return function(dispatch){
-    let url="http://localhost:3000/api/categories"
+    let url="https://orca-ecommerce-api.herokuapp.com/api/categories"
     return fetch(url).then(res=>res.json()).then(res=>dispatch(getAllCategoriesSuccess(res.message.data)))
    }
 }

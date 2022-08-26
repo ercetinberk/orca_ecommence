@@ -101,8 +101,7 @@ function EditComponent(props) {
     l_user.email=eMail
     l_user.telephone=telephone
     const access_token = localStorage.getItem("access_token");
-    let url = "http://localhost:3000/api/auth/edit";
-    console.log(l_user);
+    let url = "https://orca-ecommerce-api.herokuapp.com/api/auth/edit";
     await fetch(url, {
       method: "POST",
       headers: {
@@ -113,7 +112,6 @@ function EditComponent(props) {
     })
       .then((res) => res.json())
       .then((res) => {
-        console.log(res);
         navigate("/route=account/edit")
       })
       . catch((err) => {

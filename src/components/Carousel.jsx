@@ -107,7 +107,7 @@ function Carousal(props) {
   const { height, width } = useWindowWidthAndHeight();
   useEffect(() => {
     const getWebOffers = async () => {
-        let url = `http://localhost:3000/api/products/weboffers?customerprice=${props.currentUser.customerpricegroup}`;
+        let url = `https://orca-ecommerce-api.herokuapp.com/api/products/weboffers?customerprice=${props.currentUser.customerpricegroup}`;
         await fetch(url)
           .then((res) => res.json())
           .then((res) => {

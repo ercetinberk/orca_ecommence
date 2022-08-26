@@ -16,19 +16,93 @@ import * as settingsActions from "../redux/actions/settingsActions";
 import * as manufacturerActions from "../redux/actions/manufacturerActions";
 import * as categoryActions from "../redux/actions/categoryActions";
 import * as countryActions from "../redux/actions/countryActions";
+import { colors } from "../res/values/values";
+import { useNavigate } from "react-router-dom";
+import CircularProgress from '@mui/material/CircularProgress';
 
-const Container = styled.div`min-height:40vw`;
+import LeftSide from "../components/LeftSide";
+import Products from "../components/Products";
+
+
+const Container = styled.div`
+  min-height:40vw;
+`;
+const Row = styled.div`
+  border: 1px solid lightgray;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  padding: 10px;
+  margin:10px ;
+  @media only screen and (min-width: 767px) {
+    flex-direction: row;
+  }
+`;
+const WaitDiv = styled.div`
+  align-items: center;
+  justify-content:center ;
+`;
+const BreadCrumbTextHome = styled.a`
+font-size: 0.9rem;
+font-weight: 700;
+color: ${colors.primaryColor};
+padding: 5px;
+border-width: 0px 0px 1px 0px;
+border-color: lightgray;
+border-style: solid;
+@media only screen and (min-width: 768px) {
+  border-width: 0px 1px 0px 0px;
+  padding: 2px;
+  margin-left: 10px;
+  padding-right: 10px;
+}
+`;
+const BreadCrumbText = styled.a`
+font-size: 0.8rem;
+font-weight: 500;
+color: black;
+padding: 5px;
+border-width: 0px 0px 1px 0px;
+border-color: lightgray;
+border-style: solid;
+@media only screen and (min-width: 768px) {
+  border-width: 0px 1px 0px 0px;
+  padding: 2px;
+  margin-left: 10px;
+  padding-right: 10px;
+}
+`;
+const TwoColumnContainer = styled.div`
+  display: flex;
+  flex-direction:column ;
+  @media only screen and (min-width: 600px) {
+    flex-direction: row;
+  }
+`;
+const ContainerLoading = styled.div`
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  margin: 2rem 0.5rem;
+  align-items: center;
+  min-height: 40vw;
+`;
 function Saerch(props) {
   const [loading,setLoading]=useState(true)
+  const [productLoading,setProductLoading]=useState(true)
   const [searchParams, setSearchParams] = useSearchParams();
   const [categoryid,setCategoryId]=useState('')
   const [productid,setProductId]=useState('')
   const [filter,setFilter]=useState('')
   const [brand,setBrand]=useState('')
   const [country,setCountry]=useState('')
+  const [categoryDesc,setCategoryDesc]=useState('')
+  const [productDesc,setProductDesc]=useState('')
+  const navigate = useNavigate();
   useEffect(()=>{
     const renderPage = async ()=>{
-      await  props.actions.getSettings()
+      await props.actions.getSettings()
       await props.actions.getManufacturers()
       await props.actions.getCategories()
       await props.actions.getCountryList()
@@ -40,8 +114,19 @@ function Saerch(props) {
       setFilter(searchParams.get("filter"))
       setBrand(searchParams.get("brand"))
       setCountry(searchParams.get("country"))
+      props.categories.map(cat=>{
+        if(cat.code===categoryid)
+        setCategoryDesc(cat.description)
+      })
+      props.categories.map(subCat=>{
+        if(subCat.code===productid)
+        setProductDesc(subCat.description)
+      })
+      setProductLoading(false)
       setLoading(false)
     }
+    setProductLoading(true)
+    console.log('render SEARCH' + loading);
     renderPage()
     
   },[searchParams,categoryid,productid,filter,brand,country])
@@ -52,10 +137,36 @@ function Saerch(props) {
       <Announcement />
       {(!loading) ? 
         <Container> 
-          <TwoColumnContent  categoryid={categoryid} productid={productid} filter={filter} brand={brand} country={country}/>
+        <Row>
+            <BreadCrumbTextHome
+              onClick={() => {
+                navigate("/");
+              }}
+            >
+              HOME
+            </BreadCrumbTextHome>
+            {(categoryid) &&  <BreadCrumbText  > {categoryDesc} </BreadCrumbText>}
+            {(productid) &&  <BreadCrumbText  > {productDesc} </BreadCrumbText>}
+            {(brand) &&  <BreadCrumbText  > {brand} </BreadCrumbText>}
+            {(filter) &&  <BreadCrumbText  > Search Results for " {filter} "</BreadCrumbText>}
+            {(country) &&  <BreadCrumbText  > {country} </BreadCrumbText>}
+          </Row>
+          <TwoColumnContainer>
+            <LeftSide categoryid={categoryid} productid={productid} filter={filter} brand={brand} country={country}/>
+            {(!productLoading)?
+                <Products categoryid={categoryid} productid={productid} filter={filter} brand={brand} country={country}/>
+            :
+            <ContainerLoading>
+                <CircularProgress size={40} thickness={4}/>
+            </ContainerLoading>
+              
+            }
+          </TwoColumnContainer>
         </Container>
         :
-        <Container/>
+        <ContainerLoading>
+          <CircularProgress size={40} thickness={4}/>
+        </ContainerLoading>
       }
       <Footer />
     </Container>
@@ -85,3 +196,4 @@ function mapStateToProps(state) {
   };
 }
 export default connect(mapStateToProps,mapDispatchToProps)(Saerch);
+

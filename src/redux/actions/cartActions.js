@@ -23,7 +23,7 @@ export function getCartList() {
 }
 export function getCartListApi() {
   const access_token = localStorage.getItem("access_token");
-  let url = "http://localhost:3000/api/cart";
+  let url = "https://orca-ecommerce-api.herokuapp.com/api/cart";
   return fetch(url, {
     method: "GET",
     headers: {
@@ -54,7 +54,7 @@ export function addCart(cartItem) {
 }
 export function addToCartApi(cartItem) {
   const access_token = localStorage.getItem("access_token");
-  let url = "http://localhost:3000/api/cart/add";
+  let url = "https://orca-ecommerce-api.herokuapp.com/api/cart/add";
   return fetch(url, {
     method: "POST",
     headers: {
@@ -88,7 +88,7 @@ export function updateCartDeliveryMethod(deliverymethod) {
 export function updateCartDeliveryMethodApi(deliverymethod) {
   const body ={deliverymethod:deliverymethod}
   const access_token = localStorage.getItem("access_token");
-  let url = "http://localhost:3000/api/cart/changeDeliveryMethod";
+  let url = "https://orca-ecommerce-api.herokuapp.com/api/cart/changeDeliveryMethod";
   return fetch(url, {
     method: "POST",
     headers: {
@@ -122,7 +122,7 @@ export function removeFromCart(id) {
 }
 export function removeFromCartApi(id) {
   const access_token = localStorage.getItem("access_token");
-  let url = `http://localhost:3000/api/cart/${id}/delete`;
+  let url = `https://orca-ecommerce-api.herokuapp.com/api/cart/${id}/delete`;
   return fetch(url, {
     method: "DELETE",
     headers: {
@@ -156,7 +156,7 @@ export function updateCartItem(body) {
 }
 export function updateCartItemApi(body) {
   const access_token = localStorage.getItem("access_token");
-  let url = "http://localhost:3000/api/cart/update";
+  let url = "https://orca-ecommerce-api.herokuapp.com/api/cart/update";
   return fetch(url, {
     method: "POST",
     headers: {

@@ -22,7 +22,7 @@ export function loginUser(user) {
   };
 }
 export function loginUserApi(user) {
-  let url = "http://localhost:3000/api/auth/login";
+  let url = "https://orca-ecommerce-api.herokuapp.com/api/auth/login";
   //+(cartItem.id||"")
   return fetch(url, {
     method: "POST",
@@ -46,7 +46,7 @@ export function registerUser(user) {
   };
 }
 export function registerUserApi(user) {
-  let url = "http://localhost:3000/api/auth/register";
+  let url = "https://orca-ecommerce-api.herokuapp.com/api/auth/register";
   //+(cartItem.id||"")
   return fetch(url, {
     method: "POST",
@@ -64,7 +64,7 @@ export function logoutUser() {
 }
 export function logoutUserApi() {
   const access_token = localStorage.getItem("access_token")
-  let url = "http://localhost:3000/api/auth/logout";
+  let url = "https://orca-ecommerce-api.herokuapp.com/api/auth/logout";
   //+(cartItem.id||"")
   return fetch(url, {
     method: "GET",
@@ -87,7 +87,7 @@ export function getUser() {
 }
 export function getUserApi() {
   const access_token = localStorage.getItem("access_token")
-  let url = "http://localhost:3000/api/auth/getUser";
+  let url = "https://orca-ecommerce-api.herokuapp.com/api/auth/getUser";
   //+(cartItem.id||"")
   return fetch(url, {
     method: "GET",
@@ -112,7 +112,7 @@ export function changeDeliveryMethod(body,access_token) {
 }
 export function changeDeliveryMethodApi(body,access_token) {
   debugger
-  let url = "http://localhost:3000/api/auth/updateDeliveryMethod";
+  let url = "https://orca-ecommerce-api.herokuapp.com/api/auth/updateDeliveryMethod";
   //+(cartItem.id||"")
   return fetch(url, {
     method: "POST",

@@ -76,7 +76,7 @@ const SelectSubItem = styled.div`
 function AccordionMenu(props) {
   const navigate = useNavigate()
   const [searchParams, setSearchParams] = useSearchParams();
-  const [isActive, setIsActive] = useState(true);
+  const [isActive, setIsActive] = useState(false);
   //const [selectedItem,setSelectItem] = useState('')
   const [categoryid,setCategoryId]=useState(null)
   const [productid,setProductId]=useState(null)
@@ -114,7 +114,6 @@ function AccordionMenu(props) {
     */    
   }
   const selectedSubItem = (item)=>{
-    console.log(item);
     //(selectedItem===item.code) ? setSelectItem('') : setSelectItem(item.code)
     if(data.type==="ProductGroup"){
       (item.code === productid || item.code === brand || item.code === country) ? 
@@ -138,14 +137,7 @@ function AccordionMenu(props) {
     }
     
   }
-  const returnPreviousCategory = ()=>{
-
-    console.log(categoryid);
-    console.log(productid);
-    console.log(brand);
-    console.log(filter);
-    console.log(country);
-   
+  const returnPreviousCategory = ()=>{   
     navigate(`/route=search?${filter ? `&filter=${filter}` : ''}${brand ? `&brand=${brand}` : ''}${country ? `&country=${country}` : ''}`) 
     
   }

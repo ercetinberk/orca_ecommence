@@ -110,7 +110,6 @@ function BrandsCarousel(props) {
       : setValue(value - 100);
   };
   const moveAhead = () => {
-    console.log(value);
     value === 0
       ? setValue(-100 * (props.manufacturers.length - 5))
       : setValue(value + 100);

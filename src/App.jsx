@@ -29,8 +29,8 @@ const App = (props) => {
       setLoading(false);
     };
     renderPage();
-   // const platform = window.navigator.platform.match(/^Mac/)
-    const platform = window.navigator.platform
+    const platform = window.navigator.platform.match(/Mobile|mini|Fennec|Android|iP(ad|od|hone)|Linux/)
+    //const platform = window.navigator.p
 
     alert(platform);
     if(width<=768)

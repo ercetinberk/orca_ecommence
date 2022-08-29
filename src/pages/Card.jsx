@@ -13,7 +13,13 @@ import * as userActions from "../redux/actions/userActions";
 import * as settingsActions from "../redux/actions/settingsActions";
 import CircularProgress from '@mui/material/CircularProgress';
 import {API_URL} from "../res/values/values"
+import useWindowWidthAndHeight from "../utilities/hooks/useWindowWidthAndHeight";
 const Container = styled.div`
+  display:flex ;
+  flex:1 ;
+  flex-direction:column ;
+  min-height: ${(props) => props.height}px;
+  justify-content:space-between ;
 `;
 const ProductView = styled.div`
   min-height: 40vw;
@@ -35,6 +41,7 @@ function Card(props) {
     const [loading,setLoading]=useState(true)
     const [currentProduct,setCurrentProduct]=useState({})
     let params = useParams();
+    const { height } = useWindowWidthAndHeight();
   useEffect(()=>{
     const getProduct = async () => {
       let url = `${API_URL}/products/card/${params.productid}`
@@ -46,28 +53,15 @@ function Card(props) {
         });
   
     }
-    getProduct()
-    /*
-    props.actions.getSettings()
-    const access_token = localStorage.getItem("access_token");
-    if(access_token)
-      props.actions.getUser()
-    
-    if(props.allProducts.length > 0){
-      let product = props.allProducts.find(x=>{return x.itemno===params.productid})
-      setCurrentProduct(product)
-      setLoading(false)
-    }else
-      props.actions.getAllProducts()
-      */
-    
-    
+    getProduct()  
   },[])
   return (
-    <Container>
-      <Header />
-      <MenuBar />
-      <Announcement />
+    <Container height={height}>
+      <div>
+        <Header />
+        <MenuBar />
+        <Announcement />
+      </div>
       {(!loading) ? 
         <ProductView>
            <CardContent key={currentProduct.product_id} product={currentProduct} />

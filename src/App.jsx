@@ -7,49 +7,94 @@ import { Routes, Route } from "react-router-dom";
 import Card from "./pages/Card";
 import ShoppingCart from "./pages/ShoppingCart";
 import Checkout from "./pages/Checkout";
-import About from "./pages/About"
-import Contact from "./pages/Contact"
-import Charge from "./pages/Charge"
+import About from "./pages/About";
+import Contact from "./pages/Contact";
+import Charge from "./pages/Charge";
 //#region REDUX
 import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import * as userActions from "./redux/actions/userActions";
 import * as settingsActions from "./redux/actions/settingsActions";
-import  useWindowWidthAndHeight  from "./utilities/hooks/useWindowWidthAndHeight";
+import useWindowWidthAndHeight from "./utilities/hooks/useWindowWidthAndHeight";
+import OrcaBottomModal from "./components/Modal/OrcaBottomModal";
+import styled from "styled-components";
+import {colors} from "./res/values/values"
+
+const LogoContainer = styled.div`
+  display:flex ;
+  flex:1;
+  flex-direction:column ;
+  align-items: center;
+  justify-content: center;
+  padding:2rem ;
+`;
+const LogoImage = styled.img`
+  height: 5rem;
+  width: 5rem;
+  object-fit: contain;
+`;
+const Button = styled.div`
+  border: none;
+  padding: 15px;
+  background-color: ${colors.primaryColor};
+  color: white;
+  margin-top: 10px;
+  cursor: pointer;
+`;
 //#endregion
 const App = (props) => {
   const [loading, setLoading] = useState(true);
   const { width } = useWindowWidthAndHeight();
-  useEffect((_) => {
-    const renderPage = async () => {
-      await props.actions.getSettings();
-      const access_token = localStorage.getItem("access_token");
-      if (access_token) await props.actions.getUser();
-      setLoading(false);
-    };
-    renderPage();
-    const applePlatform = window.navigator.platform.match(/Mac|iP(ad|hone)/)
-    const androidPlatform = window.navigator.platform.match(/Mobile|mini|Fennec|Android|Linux/)
-    alert(androidPlatform);
 
-    if(width<=768)
-      {
-        (applePlatform) ? alert("Apple App Download !") : (androidPlatform) && alert("Android App Download !")
+  const applePlatform = window.navigator.platform.match(/Mac|iP(ad|hone)/);
+  const androidPlatform = window.navigator.platform.match(
+    /Mobile|mini|Fennec|Android|Linux/
+  );
+  const [disableValue, setDisabled] = useState(false);
+  const [open, setOpen] = useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => {
+    setOpen(false);
+    disableValue && setDisabled(false);
+  };
+  useEffect(
+    (_) => {
+      const renderPage = async () => {
+        await props.actions.getSettings();
+        const access_token = localStorage.getItem("access_token");
+        if (access_token) await props.actions.getUser();
+        setLoading(false);
+      };
+      renderPage();
+
+      if (width <= 768) {
+        handleOpen();
       }
-  }, [props.actions,width]);
+    },
+    [props.actions, width]
+  );
   return (
     <div>
       {loading ? (
         <div />
       ) : (
         <div>
+          <OrcaBottomModal isOpen={open} onClose={handleClose}>
+            <LogoContainer>
+              <LogoImage src={`/catalog/Products/logo.png`}></LogoImage>
+              {applePlatform ? (
+                <Button>Download My App</Button>
+              ) : (
+                androidPlatform && <Button>Download My App</Button>
+              )}
+            </LogoContainer>
+          </OrcaBottomModal>
           <Routes>
             {props.settings.intropage ? (
-                <Route path="/" element={<Intro />} />
-               
+              <Route path="/" element={<Intro />} />
             ) : (
-                <Route path="/" element={<Home />} />
+              <Route path="/" element={<Home />} />
             )}
             <Route path="/route=shop/" element={<Home />} />
             <Route path="*" element={<NoPage />} />
@@ -82,7 +127,7 @@ function mapDispatchToProps(dispatch) {
 }
 function mapStateToProps(state) {
   return {
-    settings: state.settingReducer
+    settings: state.settingReducer,
   };
 }
 export default connect(mapStateToProps, mapDispatchToProps)(App);

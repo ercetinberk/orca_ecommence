@@ -7,16 +7,25 @@ import ShoppingCartContent from "../components/PagesComponents/ShoppingCartConte
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import * as settingsActions from "../redux/actions/settingsActions";
-
-const Container = styled.div``;
+import useWindowWidthAndHeight from "../utilities/hooks/useWindowWidthAndHeight";
+const Container = styled.div`
+  display:flex ;
+  flex:1 ;
+  flex-direction:column ;
+  min-height: ${(props) => props.height}px;
+  justify-content:space-between ;
+`;
 function ShoppingCart(props) {
+  const { height } = useWindowWidthAndHeight();
   useEffect(()=>{
     props.actions.getSettings()
   },[])
   return (
-    <Container>
-      <Header />
-      <MenuBar />
+    <Container height={height}>
+      <div>
+        <Header />
+        <MenuBar />
+      </div>
       <ShoppingCartContent/>
       <Footer />
     </Container>

@@ -3,12 +3,22 @@ import CheckOutContent from "../components/CheckOutPageComponents/CheckOutConten
 import Header from "../components/Header";
 import MenuBar from "../components/MenuComponents/MenuBar";
 import Footer from "../components/Footer";
-const Container = styled.div``;
+import useWindowWidthAndHeight from "../utilities/hooks/useWindowWidthAndHeight";
+const Container = styled.div`
+  display:flex ;
+  flex:1 ;
+  flex-direction:column ;
+  min-height: ${(props) => props.height}px;
+  justify-content:space-between ;
+`;
 function Checkout() {
+  const { height } = useWindowWidthAndHeight();
   return (
-    <Container>
-      <Header />
-      <MenuBar />
+    <Container height={height}>
+      <div>
+        <Header />
+        <MenuBar />
+      </div>
       <CheckOutContent/>
       <Footer />
     </Container>

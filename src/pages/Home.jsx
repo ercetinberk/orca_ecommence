@@ -7,10 +7,18 @@ import ImageSlider from "../components/ImageSlider";
 import MenuBar from "../components/MenuComponents/MenuBar";
 import Carousel from "../components/Carousel";
 import BrandsCarousel from "../components/BrandsCarousel";
-const Container = styled.div``;
+import useWindowWidthAndHeight from "../utilities/hooks/useWindowWidthAndHeight";
+const Container = styled.div`
+  display:flex ;
+  flex:1 ;
+  flex-direction:column ;
+  min-height: ${(props) => props.height}px;
+  justify-content:space-between ;
+`;
 const Home = () => {
+  const { height } = useWindowWidthAndHeight();
   return (
-    <Container>
+    <Container height={height}>
       <Header />
       <MenuBar />
       <Announcement />

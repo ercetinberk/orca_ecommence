@@ -20,12 +20,17 @@ import { colors } from "../res/values/values";
 import { useNavigate } from "react-router-dom";
 import CircularProgress from '@mui/material/CircularProgress';
 
+import useWindowWidthAndHeight from "../utilities/hooks/useWindowWidthAndHeight";
 import LeftSide from "../components/LeftSide";
 import Products from "../components/Products";
 
 
 const Container = styled.div`
-  min-height:40vw;
+  display:flex ;
+  flex:1 ;
+  flex-direction:column ;
+  min-height: ${(props) => props.height}px;
+  justify-content:space-between ;
 `;
 const Row = styled.div`
   border: 1px solid lightgray;
@@ -100,6 +105,7 @@ function Saerch(props) {
   const [categoryDesc,setCategoryDesc]=useState('')
   const [productDesc,setProductDesc]=useState('')
   const navigate = useNavigate();
+  const { height } = useWindowWidthAndHeight();
   useEffect(()=>{
     const renderPage = async ()=>{
       await props.actions.getSettings()
@@ -131,10 +137,13 @@ function Saerch(props) {
     
   },[searchParams,categoryid,productid,filter,brand,country])
   return (
-    <Container>
-      <Header />
-      <MenuBar />
-      <Announcement />
+    <Container height={height}>
+      <div>
+        <Header />
+        <MenuBar />
+        <Announcement />
+      </div>
+      
       {(!loading) ? 
         <Container> 
         <Row>

@@ -17,12 +17,20 @@ import { bindActionCreators } from "redux";
 import AccountMenu from "../components/AccoundComponents/AccountMenu"
 import * as settingsActions from "../redux/actions/settingsActions";
 import * as userActions from "../redux/actions/userActions";
+import useWindowWidthAndHeight from "../utilities/hooks/useWindowWidthAndHeight";
+
 const Container = styled.div`
-  min-height:40vw ;
+  display:flex ;
+  flex:1 ;
+  flex-direction:column ;
+  min-height: ${(props) => props.height}px;
+  justify-content:space-between ;
 `;
 const TwoColumn = styled.div`
-  min-height:40vw ;
   display: flex;
+  flex:1;
+  background-color:green ;
+  justify-content:flex-start ;
   flex-direction:column ;
   @media only screen and (min-width: 600px) {
     flex-direction: row;
@@ -42,6 +50,7 @@ function MyAccount(props) {
   const [searchParams, setSearchParams] = useSearchParams();
   let params = useParams();
   const navigate = useNavigate();
+  const { height } = useWindowWidthAndHeight();
   useEffect(() => {
     const componentDidMount = async () => {
         await props.actions.getSettings();
@@ -56,9 +65,12 @@ function MyAccount(props) {
     navigate(-1)
   }
   return (
-    <Container>
-      <Header />
-      <MenuBar />
+    <Container height={height}>
+      <div>
+        <Header />
+        <MenuBar />
+      </div>
+      
       {!loading ? (
         <TwoColumn>
         <LeftDiv>
@@ -73,7 +85,7 @@ function MyAccount(props) {
           {(params.page==="success") && <SuccessContent/>}
           {(params.page==="edit") && <EditComponent currentUser={props.currentUser}/>}
         </RightDiv>
-      </TwoColumn>
+        </TwoColumn>
         
       ) : (
         <Container/>

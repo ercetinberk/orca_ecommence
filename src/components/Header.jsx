@@ -27,7 +27,7 @@ const Container = styled.div`
   padding-bottom: 10px;
   flex-direction: column;
   justify-content: space-between;
-  @media only screen and (min-width: 768px) {
+  @media only screen and (min-width: 769px) {
     flex-direction: row;
   }
   @media only screen and (min-width: 992px) {
@@ -149,23 +149,6 @@ function NavBar(props) {
                 />
               </AccountInfo>
             )}
-            {(width>768)&&
-              <AccountInfo>
-              <DropDownMenu
-                flexDirection="column"
-                icon={<Info />}
-                text={"ABOUT"}
-                contentWidth="10rem"
-                fontSize="0.8rem"
-                fontWeight="400"
-                right="3rem"
-                top="3.5rem"
-                minHeight="10vh"
-                contentLinks={<AboutMenuContent />}
-              />
-            </AccountInfo>
-            }
-            
             {props.cart.length > 0 && (
               <AccountInfo>
                 <DropDownMenu

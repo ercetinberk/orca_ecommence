@@ -247,7 +247,9 @@ function ShoppingCartContentLine(props) {
                 value={qtyValue}
                 disabled={disableValue}
                 ref={inputRef}
-              />
+              >
+                
+              </QtyInput>
               <QtyButtons
                 onClick={() => {
                   onButtonClickHandler(1, props.cartItem);

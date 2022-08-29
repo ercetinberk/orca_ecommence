@@ -29,8 +29,8 @@ const App = (props) => {
       setLoading(false);
     };
     renderPage();
-    const applePlatform = window.navigator.platform.match(/^Mac^|^iP(ad|hone)^/)
-    const androidPlatform = window.navigator.platform.match(/^Linux^/)
+    const applePlatform = window.navigator.platform.match(/Mac|iP(ad|hone)/)
+    const androidPlatform = window.navigator.platform.match(/Linux/)
     //const platform = window.navigator.p
 
     if(width<=768)

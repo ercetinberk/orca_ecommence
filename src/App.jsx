@@ -29,12 +29,14 @@ const App = (props) => {
       setLoading(false);
     };
     renderPage();
-    const platform = window.navigator.platform.match(/^Mac|^iP(ad|hone)/)
+    const applePlatform = window.navigator.platform.match(/^Mac^|^iP(ad|hone)^/)
+    const androidPlatform = window.navigator.platform.match(/^Linux^/)
     //const platform = window.navigator.p
 
-    alert(platform);
     if(width<=768)
-      alert("download mobile app please")
+      {
+        (applePlatform) ? alert("Apple App Download !") : (androidPlatform) && alert("Android App Download !")
+      }
   }, [props.actions,width]);
   return (
     <div>

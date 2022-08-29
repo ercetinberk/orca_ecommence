@@ -2,9 +2,10 @@ import { useEffect } from "react";
 import { Badge } from "@material-ui/core";
 import {
   AccountCircle,
-  ShoppingCartOutlined,
+  ShoppingCartRounded,
   Info,
   ShoppingBasketRounded,
+  GetAppRounded
 } from "@material-ui/icons";
 import Autocomplete from "./AutoComplete";
 import styled from "styled-components";
@@ -114,6 +115,14 @@ function NavBar(props) {
         </LogoContainer>
         {width <= 768 && (
           <ButtonSection>
+            <AccountInfo
+                onClick={() => {
+                  navigate("/route=shop");
+                }}
+              >
+                <GetAppRounded />
+                MY APP
+              </AccountInfo>
             {props.settings.intropage && (
               <AccountInfo
                 onClick={() => {
@@ -133,9 +142,9 @@ function NavBar(props) {
                   contentWidth="10rem"
                   fontSize="0.8rem"
                   fontWeight="400"
-                  right="8rem"
-                  top="3.5rem"
-                  minHeight="20vh"
+                  right="3rem"
+                  top="5rem"
+                  minHeight="10vh"
                   contentLinks={<AccountMenuContent />}
                 />
               </AccountInfo>
@@ -151,7 +160,7 @@ function NavBar(props) {
                 fontWeight="400"
                 right="3rem"
                 top="3.5rem"
-                minHeight="20vh"
+                minHeight="10vh"
                 contentLinks={<AboutMenuContent />}
               />
             </AccountInfo>
@@ -167,7 +176,7 @@ function NavBar(props) {
                       badgeContent={props.cart !== null && props.cart.length}
                       color="secondary"
                     >
-                      <ShoppingCartOutlined />
+                      <ShoppingCartRounded />
                     </Badge>
                   }
                   text={"BASKET"}
@@ -175,7 +184,7 @@ function NavBar(props) {
                   fontSize="0.8rem"
                   fontWeight="400"
                   right="1rem"
-                  top="3.5rem"
+                  top="5rem"
                   minHeight="50vh"
                   contentLinks={<CartMenuContent />}
                 />
@@ -211,9 +220,9 @@ function NavBar(props) {
                   contentWidth="10rem"
                   fontSize="0.8rem"
                   fontWeight="400"
-                  right="8rem"
-                  top="3.5rem"
-                  minHeight="20vh"
+                  right="5.5rem"
+                  top="5rem"
+                  minHeight="5vh"
                   contentLinks={<AccountMenuContent />}
                 />
               </AccountInfo>
@@ -226,9 +235,9 @@ function NavBar(props) {
                 contentWidth="10rem"
                 fontSize="0.8rem"
                 fontWeight="400"
-                right="3rem"
-                top="3.5rem"
-                minHeight="20vh"
+                right="2rem"
+                top="5rem"
+                minHeight="10vh"
                 contentLinks={<AboutMenuContent />}
               />
             </AccountInfo>
@@ -242,7 +251,7 @@ function NavBar(props) {
                       badgeContent={props.cart !== null && props.cart.length}
                       color="secondary"
                     >
-                      <ShoppingCartOutlined />
+                      <ShoppingCartRounded />
                     </Badge>
                   }
                   text={"BASKET"}
@@ -250,7 +259,7 @@ function NavBar(props) {
                   fontSize="0.8rem"
                   fontWeight="400"
                   right="1rem"
-                  top="3.5rem"
+                  top="5rem"
                   minHeight="50vh"
                   contentLinks={<CartMenuContent />}
                 />

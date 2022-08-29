@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { FiberManualRecordRounded,KeyboardArrowLeftOutlined,KeyboardArrowRightOutlined } from "@material-ui/icons";
 import styled from "styled-components";
-import {colors} from "../res/values/values"
+import {colors,API_URL} from "../res/values/values"
 //#region Styles
 const Container = styled.div`
   margin: 0 auto;
@@ -61,7 +61,7 @@ function ImageSlider(props) {
   const [timeId,setTimeId]=useState("")
   useEffect(() => {
     const getBanners = async () => {
-      let url = "https://orca-ecommerce-api.herokuapp.com/api/banners";
+      let url = `${API_URL}/banners`
       await fetch(url)
         .then((res) => res.json())
         .then((res) => {

@@ -12,6 +12,7 @@ import * as productActions from "../redux/actions/productActions";
 import * as userActions from "../redux/actions/userActions";
 import * as settingsActions from "../redux/actions/settingsActions";
 import CircularProgress from '@mui/material/CircularProgress';
+import {API_URL} from "../res/values/values"
 const Container = styled.div`
 `;
 const ProductView = styled.div`
@@ -36,7 +37,7 @@ function Card(props) {
     let params = useParams();
   useEffect(()=>{
     const getProduct = async () => {
-      let url = `https://orca-ecommerce-api.herokuapp.com/api/products/card/${params.productid}`
+      let url = `${API_URL}/products/card/${params.productid}`
       await fetch(url)
         .then((res) => res.json())
         .then((res) => {

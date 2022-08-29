@@ -13,6 +13,7 @@ import DeliveryDetailsComponent from "./DeliveryDetailsComponent";
 import DeliveryMethodComponents from "./DeliveryMethodComponents";
 import OrcaModal from "../Modal/OrcaModal"
 import Charge from "../../pages/Charge"
+import {API_URL} from "../../res/values/values"
 //#region STYLES
 const Container = styled.div`
   min-height: 40vw;
@@ -108,7 +109,7 @@ function CheckOutContent(props) {
     //console.log(user);
     //await props.actions.checkOutOrder(user)
     const access_token = localStorage.getItem("access_token");
-    let url = "https://orca-ecommerce-api.herokuapp.com/api/cart/checkout";
+    let url = `${API_URL}/cart/checkout`;
     await fetch(url, {
       method: "POST",
       headers: {
@@ -148,7 +149,7 @@ function CheckOutContent(props) {
     //console.log(user);
     //await props.actions.checkOutOrder(user)
     const access_token = localStorage.getItem("access_token");
-    let url = "https://orca-ecommerce-api.herokuapp.com/api/cart/checkout";
+    let url = `${API_URL}/cart/checkout`;
     await fetch(url, {
       method: "POST",
       headers: {

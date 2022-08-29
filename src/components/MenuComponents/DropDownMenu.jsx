@@ -38,8 +38,11 @@ const MenuItemContent = styled.div`
 //#endregion
 const DropDownMenu = (props) => {
   const [menuToggle, setmenuToggle] = useState(false);
+  const onMouseClickHandler = () => {
+    (menuToggle) ? setmenuToggle(false) : setmenuToggle(true)
+  };
   const onMouseEnterHandler = () => {
-    setmenuToggle(true);
+    setmenuToggle(true)
   };
   const onMouseLeaveHandler = () => {
     setmenuToggle(false);
@@ -54,7 +57,9 @@ const DropDownMenu = (props) => {
           
         }}
         onMouseOver={onMouseEnterHandler}
+      
         onMouseLeave={onMouseLeaveHandler}
+        //onClick={onMouseClickHandler}
       >
         {props.icon !== undefined && props.icon}
         <p>{props.text}</p>

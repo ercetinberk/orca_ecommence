@@ -46,6 +46,7 @@ const ClearFilter = styled.div`
   color: ${colors.primaryColor};
   padding: 5px;
   margin: 5px;
+  cursor: pointer;
   @media only screen and (min-width: 768px) {
   }
 `;

@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import { colors } from "../../res/values/values";
+import { colors,API_URL } from "../../res/values/values";
 const Container = styled.div`
   min-height: 40vw;     
   display: flex;
@@ -101,7 +101,7 @@ function EditComponent(props) {
     l_user.email=eMail
     l_user.telephone=telephone
     const access_token = localStorage.getItem("access_token");
-    let url = "https://orca-ecommerce-api.herokuapp.com/api/auth/edit";
+    let url = `${API_URL}/auth/edit`;
     await fetch(url, {
       method: "POST",
       headers: {

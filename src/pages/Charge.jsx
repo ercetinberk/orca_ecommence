@@ -6,7 +6,7 @@ import { STRIPE_KEY } from "../res/values/values";
 import ChargeContent from "../components/PagesComponents/ChargeContent";
 import styled from "styled-components";
 import CircularProgress from '@mui/material/CircularProgress';
-import { colors } from "../res/values/values";
+import { colors,API_URL } from "../res/values/values";
 const Container = styled.div`
   align-items: center;
   width:20rem ;
@@ -36,7 +36,7 @@ const Charge = ({totalPayment,confirmOrderWithPayment,user}) => {
   useEffect(() => {
     const getClinetSecret = async () => {
       try {
-        let url = "https://orca-ecommerce-api.herokuapp.com/api/charge/secure";
+        let url = `${API_URL}/charge/secure`;
         await fetch(url, {
           method: "POST",
           headers: {
@@ -70,7 +70,7 @@ const Charge = ({totalPayment,confirmOrderWithPayment,user}) => {
   const cancelPayment = async () => {
     try {
       
-      let url = "https://orca-ecommerce-api.herokuapp.com/api/charge/cancel";
+      let url = `${API_URL}/charge/cancel`;
       await fetch(url, {
         method: "POST",
         headers: {

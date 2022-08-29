@@ -4,10 +4,11 @@ import Footer from "../components/Footer";
 import Header from "../components/Header";
 import MenuBar from "../components/MenuComponents/MenuBar";
 import IntroContent from "../components/PagesComponents/IntroContent";
+import {API_URL} from "../res/values/values"
 const Container = styled.div``;
 const Intro = () => {
   const sendMail = async (values)=>{
-    let url = "https://orca-ecommerce-api.herokuapp.com/api/mail";
+    let url = `${API_URL}/mail`;
     let rv = false
     await fetch(url, {
       method: "POST",

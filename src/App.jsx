@@ -16,9 +16,11 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import * as userActions from "./redux/actions/userActions";
 import * as settingsActions from "./redux/actions/settingsActions";
+import  useWindowWidthAndHeight  from "./utilities/hooks/useWindowWidthAndHeight";
 //#endregion
 const App = (props) => {
   const [loading, setLoading] = useState(true);
+  const { width } = useWindowWidthAndHeight();
   useEffect((_) => {
     const renderPage = async () => {
       await props.actions.getSettings();
@@ -27,7 +29,13 @@ const App = (props) => {
       setLoading(false);
     };
     renderPage();
-  }, [props.actions]);
+   // const platform = window.navigator.platform.match(/^Mac/)
+    const platform = window.navigator.platform
+
+    console.log(platform);
+    if(width<=768)
+      alert("download mobile app please")
+  }, [props.actions,width]);
   return (
     <div>
       {loading ? (

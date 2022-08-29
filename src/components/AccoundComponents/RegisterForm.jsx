@@ -2,7 +2,7 @@ import { Checkbox } from "@mui/material";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import { colors } from "../../res/values/values";
+import { colors,API_URL } from "../../res/values/values";
 import OrcaModal from "../Modal/OrcaModal";
 import useForm from "../../utilities/hooks/useForm";
 import { registerValidateInfo } from "../../utilities/helpers";
@@ -138,7 +138,7 @@ function RegisterForm(props) {
         telephone: values.telephone,
         password: values.password,
       };
-      let url = "https://orca-ecommerce-api.herokuapp.com/api/auth/register";
+      let url = `${API_URL}/auth/register`;
       fetch(url, {
         method: "POST",
         headers: { "content-type": "application/json" },

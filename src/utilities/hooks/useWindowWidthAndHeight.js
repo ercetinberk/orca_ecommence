@@ -17,6 +17,7 @@ export default function useWindowWidthAndHeight() {
   
     useEffect(() => {
       if (hasWindow) {
+        console.log('change width');
         function handleResize() {
           setWindowDimensions(getWindowDimensions());
         }

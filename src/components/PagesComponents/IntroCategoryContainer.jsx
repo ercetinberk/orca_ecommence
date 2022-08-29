@@ -18,6 +18,7 @@ const Row = styled.div`
 `;
 const Category = styled.div`
     margin:10px ;
+    cursor: pointer;
     @media only screen and (max-width: 768px) {
       width: 100%;
       display:flex ; 

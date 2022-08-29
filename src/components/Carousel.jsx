@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 import { KeyboardArrowLeftOutlined,KeyboardArrowRightOutlined } from "@material-ui/icons";
 import styled from "styled-components";
-import {colors} from "../res/values/values"
+import {colors,API_URL} from "../res/values/values"
 import { useNavigate } from "react-router-dom";
 import useWindowWidthAndHeight  from "../utilities/hooks/useWindowWidthAndHeight";
 import ProductCardView from "./ProductCardView";
@@ -107,7 +107,7 @@ function Carousal(props) {
   const { height, width } = useWindowWidthAndHeight();
   useEffect(() => {
     const getWebOffers = async () => {
-        let url = `https://orca-ecommerce-api.herokuapp.com/api/products/weboffers?customerprice=${props.currentUser.customerpricegroup}`;
+        let url = `${API_URL}/products/weboffers?customerprice=${props.currentUser.customerpricegroup}`;
         await fetch(url)
           .then((res) => res.json())
           .then((res) => {

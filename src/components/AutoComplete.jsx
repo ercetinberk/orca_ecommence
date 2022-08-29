@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import * as productActions from "../redux/actions/productActions";
-import { colors } from "../res/values/values";
+import { colors,API_URL } from "../res/values/values";
 import { Search } from "@material-ui/icons";
 import { useNavigate } from "react-router-dom";
 //#region styles
@@ -206,7 +206,7 @@ const Autocomplete = (props) => {
     */
   };
   const getSearchProductsProduct = async (filter) => {
-    let url = `https://orca-ecommerce-api.herokuapp.com/api/products/search?filter=${filter}`
+    let url = `${API_URL}/products/search?filter=${filter}`
     await fetch(url)
       .then((res) => res.json())
       .then((res) => {

@@ -1,5 +1,6 @@
 /* eslint-disable no-use-before-define */
 import * as actionTypes from "./actionTypes";
+import {API_URL} from "../../res/values/values"
 
 export function getAllProductsSuccess(products) {
   return { type: actionTypes.Get_All_Products_Success, payload: products };
@@ -15,7 +16,7 @@ export function getProductsSuccessDataCount(dataCount) {
 }
 export function getProducts(catId, productid,filter, page, rowsPerPage,user,brand,country) {
   return function (dispatch) {
-    let url = "https://orca-ecommerce-api.herokuapp.com/api/products";
+    let url = `${API_URL}/products`;
   
       url+=`?search=orca${catId ? `&itemcategory=${catId}` : ''}`+
       `${productid ? `&productgroup=${productid}` : ''}`+
@@ -36,7 +37,7 @@ export function getProducts(catId, productid,filter, page, rowsPerPage,user,bran
 }
 export function getFilterProducts(catId, productid,filter, page, rowsPerPage,user,brand,country) {
   return function (dispatch) {
-    let url = "https://orca-ecommerce-api.herokuapp.com/api/products";
+    let url = `${API_URL}/products`;
     if (filter)
       url += `?filter=${filter}&page=${page}&rowsPerPage=${rowsPerPage}&customerprice=${user.customerpricegroup}`;
     else url += `?page=${page}&rowsPerPage=${rowsPerPage}&customerprice=${user.customerpricegroup}`;
@@ -60,7 +61,7 @@ export function getAllSearchProductsSuccess(products) {
 
 export function getSearchProducts() {
   return function (dispatch) {
-    let url = "https://orca-ecommerce-api.herokuapp.com/api/products";
+    let url = `${API_URL}/products`;
     return fetch(url)
       .then((res) => res.json())
       .then((res) => dispatch(getAllSearchProductsSuccess(res.message.data)));

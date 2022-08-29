@@ -32,7 +32,7 @@ const App = (props) => {
    // const platform = window.navigator.platform.match(/^Mac/)
     const platform = window.navigator.platform
 
-    console.log(platform);
+    alert(platform);
     if(width<=768)
       alert("download mobile app please")
   }, [props.actions,width]);

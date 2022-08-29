@@ -29,7 +29,7 @@ const App = (props) => {
       setLoading(false);
     };
     renderPage();
-    const platform = window.navigator.platform.match(/Mobile|mini|Fennec|Android|iP(ad|od|hone)|Linux/)
+    const platform = window.navigator.platform.match(/^Mac|^iP(ad|hone)/)
     //const platform = window.navigator.p
 
     alert(platform);

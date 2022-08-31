@@ -231,7 +231,7 @@ const Autocomplete = (props) => {
     navigate("/route=search?filter=" + userInput)
   };
   const onKeyDown = (e) => {
-   
+    
     // User pressed the enter key
     if (e.keyCode === 13) {
       setShowSuggestions(false);
@@ -355,6 +355,8 @@ const Autocomplete = (props) => {
       <SearchButton
         onClick={() => {
           navigate("/route=search?filter=" + userInput);
+          setShowSuggestions(false);
+          setActiveSuggestion(-1);
         }}
       >
         <Search

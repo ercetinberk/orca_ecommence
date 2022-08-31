@@ -17,7 +17,7 @@ function MenuBarCategoriesContent(props) {
     <div>
         {props.categories.filter(cat=>cat.indentation==="ItemCategory").map((cat) => {
           return (
-            <div style={{listStyle:"none"}} onClick={()=>_changeCategory(cat)} key={cat.code}>
+            <div style={{listStyle:"none",cursor:"pointer"}} onClick={()=>_changeCategory(cat)} key={cat.code}>
               <a>{cat.description}</a>
             </div>
           );

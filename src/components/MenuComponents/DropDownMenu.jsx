@@ -1,9 +1,9 @@
 import styled from "styled-components";
 import { useState } from "react";
 import {colors} from "../../res/values/values"
+import MobileMenuBarContent from "../MenuComponents/MobileMenuBarContent";
 //#region styles
 const Container = styled.div`
-  
 `;
 const MenuItem = styled.div`
   font-size: 22px;
@@ -12,7 +12,6 @@ const MenuItem = styled.div`
   display: flex;
   align-items: center;
   cursor: pointer;
-  
 `;
 const MenuItemContent = styled.div`
   position: absolute;
@@ -24,11 +23,13 @@ const MenuItemContent = styled.div`
   max-height:50vh ;
   overflow-y: scroll;
   white-space: nowrap;
+  
   & a {
     color: ${colors.primaryColor};
     padding: 12px 16px;
     text-decoration: none;
     display: block;
+    border-bottom: 1px solid #e5e5e5;
   }
   & a:hover {
      background-color: ${colors.primaryColor}; 
@@ -39,7 +40,7 @@ const MenuItemContent = styled.div`
 const DropDownMenu = (props) => {
   const [menuToggle, setmenuToggle] = useState(false);
   const onMouseClickHandler = () => {
-    (menuToggle) ? setmenuToggle(false) : setmenuToggle(true)
+    setmenuToggle(true)
   };
   const onMouseEnterHandler = () => {
     setmenuToggle(true)
@@ -57,7 +58,6 @@ const DropDownMenu = (props) => {
           
         }}
         onMouseOver={onMouseEnterHandler}
-      
         onMouseLeave={onMouseLeaveHandler}
         //onClick={onMouseClickHandler}
       >
@@ -67,16 +67,23 @@ const DropDownMenu = (props) => {
       <MenuItemContent
         onMouseOver={onMouseEnterHandler}
         onMouseLeave={onMouseLeaveHandler}
+        //onClick={onMouseLeaveHandler}
         style={{
           width: props.contentWidth,
           display: menuToggle ? "block" : "none",
           right: props.right !== undefined ? props.right : "",
+          left: props.left !== undefined ? props.left : "",
           top: props.top !== undefined ? props.top : "",
           minHeight: props.minHeight !== undefined ? props.minHeight : "",
           
         }}
       >
-        {props.contentLinks}
+        {
+          (props.contentLinks==="mobileMenu") ?
+          <MobileMenuBarContent close={onMouseLeaveHandler}/>
+          :
+          props.contentLinks
+        }
       </MenuItemContent>
     </Container>
   );

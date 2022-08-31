@@ -10,6 +10,7 @@ import PasswordContent from "../components/AccoundComponents//PasswordContent";
 import LogoutForm from "../components/AccoundComponents//LogoutForm";
 import RegisterForm from "../components/AccoundComponents//RegisterForm";
 import SuccessContent from "../components/AccoundComponents/SuccessContent";
+import ForgotPassword from "../components/AccoundComponents/ForgotPassword";
 import {useParams,useSearchParams,useNavigate} from "react-router-dom";
 import { useEffect, useState } from "react";
 import { connect } from "react-redux";
@@ -29,7 +30,6 @@ const Container = styled.div`
 const TwoColumn = styled.div`
   display: flex;
   flex:1;
-  background-color:green ;
   justify-content:flex-start ;
   flex-direction:column ;
   @media only screen and (min-width: 600px) {
@@ -79,7 +79,8 @@ function MyAccount(props) {
         <RightDiv>
           {(params.page==="login") && <LoginForm goBack={goBackForLogin}/>}
           {(params.page==="register") && <RegisterForm success={searchParams.get("success")}/>}
-          {(params.page==="password") && <PasswordContent currentUser={props.currentUser} />}
+          {(params.page==="password") && <PasswordContent currentUser={props.currentUser} id={searchParams.get("id")}/>}
+          {(params.page==="forgotPassword") && <ForgotPassword/>}
           {(params.page==="order") && <OrderHistoryContent document_no={searchParams.get("id")} type={searchParams.get("type")} />}
           {(params.page==="logout") && <LogoutForm/>}
           {(params.page==="success") && <SuccessContent/>}

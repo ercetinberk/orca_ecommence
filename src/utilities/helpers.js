@@ -62,6 +62,15 @@ export const  validateInfo= (values) => {
   */
   return errors;
 }
+export const  validateMailInfo= (values) => {
+  let errors = {};
+  if (!values.email) {
+    errors.email = 'Email required';
+  } else if (!/\S+@\S+\.\S+/.test(values.email)) {
+    errors.email = 'Email address is invalid';
+  }
+  return errors;
+}
 export const  loginValidateInfo= (values) => {
   let errors = {};
   if (!values.email) {

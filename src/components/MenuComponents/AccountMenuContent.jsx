@@ -20,6 +20,7 @@ const AccountButton = styled.div`
   margin: 2px;
   padding: 5px;
   margin-top: 5px;
+  cursor: pointer;
 `;
 
 //#endregion

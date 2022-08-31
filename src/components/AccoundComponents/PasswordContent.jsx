@@ -1,12 +1,12 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import { colors,API_URL } from "../../res/values/values";
+import { colors, API_URL } from "../../res/values/values";
 const Container = styled.div`
-  min-height: 40vw;     
+  min-height: 40vw;
   display: flex;
   padding-top: 20px;
-  flex-direction:column ;
+  flex-direction: column;
 `;
 const Wrapper = styled.div`
   padding: 20px;
@@ -29,7 +29,7 @@ const Label = styled.div`
 const Form = styled.form`
   display: flex;
   flex-wrap: wrap;
-  flex-direction:column ;
+  flex-direction: column;
 `;
 const Input = styled.input`
   flex: 1;
@@ -51,6 +51,7 @@ const Button = styled.input`
   padding: 15px;
   background-color: ${colors.primaryColor};
   color: white;
+  cursor: pointer;
 `;
 const Error = styled.div`
   text-align: center;
@@ -66,7 +67,8 @@ function PasswordContent(props) {
   const [password, setPassword] = useState("");
   const [passwordConfirm, setPasswordConfirm] = useState("");
   const [error, setError] = useState("");
-  let l_user = props.currentUser
+  let l_user = props.currentUser;
+  let userId = props.id;
   const onChangeHandler = (event) => {
     //setUserName(event.target.value)
     let name = event.target.name;
@@ -74,29 +76,50 @@ function PasswordContent(props) {
     switch (name) {
       case "password":
         setPassword(value);
-        setError("")
+        setError("");
         break;
       case "passwordConfirm":
         setPasswordConfirm(value);
-        setError("")
+        setError("");
         break;
       default:
       // code block
     }
   };
-  const onSubmitHandler =  (event) => {
+  const onSubmitHandler = (event) => {
     event.preventDefault();
-    editUser()
-
+    editUser();
   };
   const editUser = async () => {
-    if(password !== passwordConfirm){
-        setError("Password confirmation does not match password!")
-    }else{
-        const user={
-            id:l_user.id,
-            password:password
-        }
+    if (password !== passwordConfirm) {
+      setError("Password confirmation does not match password!");
+    } else {
+      if (userId) {
+        const user = {
+          id: userId,
+          password: password,
+        };
+        let url = `${API_URL}/auth/resetPassword`;
+        await fetch(url, {
+          method: "POST",
+          headers: {
+            "content-type": "application/json",
+          },
+          body: JSON.stringify(user),
+        })
+          .then((res) => res.json())
+          .then((res) => {
+            navigate("/route=account/login");
+          })
+          .catch((err) => {
+            let error = JSON.parse(err.message);
+            console.log("CATCH : " + error);
+          });
+      } else {
+        const user = {
+          id: l_user.id,
+          password: password,
+        };
         const access_token = localStorage.getItem("access_token");
         let url = `${API_URL}/auth/changePassword`;
         await fetch(url, {
@@ -109,20 +132,20 @@ function PasswordContent(props) {
         })
           .then((res) => res.json())
           .then((res) => {
-            navigate("/route=account/edit")
+            navigate("/route=account/edit");
           })
-          . catch((err) => {
+          .catch((err) => {
             let error = JSON.parse(err.message);
-            console.log('CATCH : '+error);
+            console.log("CATCH : " + error);
           });
+      }
     }
-    
   };
   //const { register, handleSubmit, watch, errors } = useForm();
   return (
     <div>
       <Container>
-       {(error !== "" ) && <Error>{error}</Error>}
+        {error !== "" && <Error>{error}</Error>}
         <Wrapper>
           <Title>Change Password</Title>
           <Label>Your Password</Label>
@@ -141,7 +164,7 @@ function PasswordContent(props) {
               placeholder="* Password Confirm"
               onChange={onChangeHandler}
             />
-        
+
             <Button type="submit" value="Save"></Button>
           </Form>
         </Wrapper>

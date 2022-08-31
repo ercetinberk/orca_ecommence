@@ -24,6 +24,7 @@ const Container = styled.div`
   transition: all 0.2s ease;
   position: relative;
   overflow: hidden;
+  cursor: pointer;
   &:hover {
     border: 1px solid ${colors.primaryColor};
   }

@@ -25,6 +25,7 @@ const Button = styled.button`
   background-color: ${colors.primaryColor};
   margin-bottom: 10px;
   margin-top: 10px;
+  cursor: pointer;
 `;
 function Logout() {
   const navigate = useNavigate()

@@ -41,6 +41,10 @@ const Button = styled.div`
   color: white;
   margin-top: 10px;
   cursor: pointer;
+  & a {
+    color:white ;
+    text-decoration-line:none;
+  }
 `;
 //#endregion
 const App = (props) => {
@@ -84,9 +88,11 @@ const App = (props) => {
             <LogoContainer>
               <LogoImage src={`/catalog/Products/logo.png`}></LogoImage>
               {applePlatform ? (
-                <Button>Download My App</Button>
+                <Button><a href="https://apps.apple.com/tr/app/expo-foods-application/id1582599794">Download My App</a></Button>
               ) : (
-                androidPlatform && <Button>Download My App</Button>
+                androidPlatform && <Button>
+                  <a href="https://play.google.com/store/apps/details?id=com.expofoodssalesapp">Download My App</a>
+                </Button>
               )}
             </LogoContainer>
           </OrcaBottomModal>

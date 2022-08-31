@@ -37,6 +37,7 @@ const List = styled.ul`
     display: list-item;
     text-align: -webkit-match-parent;
     margin-bottom: 5px;
+    cursor: pointer;
     & a {
       color: ${colors.primaryColor};
     }

@@ -27,7 +27,7 @@ function MenuBarCountriesContent(props) {
             .map((reg) => {
               return (
                 <div
-                  style={{ listStyle: "none" }}
+                  style={{ listStyle: "none",cursor:"pointer" }}
                   onClick={() => _changeCountry(reg)}
                   key={reg.code}
                 >

@@ -10,6 +10,7 @@ import OrderListComponent from "../OrderComponents/OrderListComponent";
 import OrderLineListComponent from "../OrderComponents/OrderLineListComponent";
 import { useNavigate } from "react-router-dom";
 import {API_URL} from "../../res/values/values"
+import CircularProgress from '@mui/material/CircularProgress';
 //#region STYLES
 
 const Container = styled.div`
@@ -181,7 +182,9 @@ function OrderHistoryContent(props) {
           </Container>
         )
       ) : (
-        <Container></Container>
+        <Container>
+          <CircularProgress size={40} thickness={4}/>
+        </Container>
       )}
     </div>
   );

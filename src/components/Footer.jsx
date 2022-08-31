@@ -1,6 +1,7 @@
 import { Divider } from "@material-ui/core";
 import { AddLocation, Call, Email,Facebook,Twitter } from "@material-ui/icons";
 import styled from "styled-components";
+import { useNavigate } from "react-router-dom";
 
 const Container = styled.div`
   color: #fff;
@@ -24,6 +25,7 @@ const ColumnList = styled.ul`
   margin-left: 10px;
   margin-right:10px ;
   padding: 0;
+  cursor: pointer;
 `;
 const ColumnListTitle = styled.li`
   font-size: 1.1rem;
@@ -51,6 +53,7 @@ const Bottom = styled.div`
   }
 `;
 function Footer() {
+  const navigate = useNavigate();
   return (
     <Container>
       <Top>
@@ -82,11 +85,11 @@ function Footer() {
           
         </ColumnList>
         <ColumnList>
-          <ColumnListTitle>About Us</ColumnListTitle>
-          <ColumnListItem>
+          <ColumnListTitle >About Us</ColumnListTitle>
+          <ColumnListItem onClick={(_) => navigate("/route=contact")}>
             Contact
           </ColumnListItem>
-          <ColumnListItem>
+          <ColumnListItem onClick={(_) => navigate("/route=about")}>
             About
           </ColumnListItem>
         </ColumnList>

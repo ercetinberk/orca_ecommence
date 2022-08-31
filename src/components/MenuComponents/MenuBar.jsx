@@ -16,6 +16,15 @@ const Container = styled.div`
   background-color: ${colors.primaryColor};
   color: ${colors.whiteColor};
   padding: 10px;
+
+  position: relative;
+`;
+const ContainerMobile = styled.div`
+  display: flex;
+  align-items: center;
+  background-color: ${colors.primaryColor};
+  color: ${colors.whiteColor};
+  padding:10px;
   position: relative;
 `;
 const MenuItem = styled.div`
@@ -40,6 +49,7 @@ function MenuBar() {
       renderMenuBar = (
         <Container>
           <DropDownMenu
+            top="2.28rem"
             icon={<Menu />}
             text="CATEGORIES"
             contentLinks={<MenuBarCategoriesContent />}
@@ -49,6 +59,7 @@ function MenuBar() {
             style={{ margin: "0 10px", background: "#f2f2f2" }}
           />
           <DropDownMenu
+            top="2.28rem"
             icon={<Menu />}
             text="COUNTRIES"
             contentLinks={<MenuBarCountriesContent />}
@@ -72,13 +83,15 @@ function MenuBar() {
       );
     } else {
       renderMenuBar = (
-        <Container>
+        <ContainerMobile>
           <DropDownMenu
+            top="0rem"
+            left="0rem"
             icon={<Menu />}
             text=""
-            contentLinks={<MobileMenuBarContent />}
+            contentLinks={"mobileMenu"}
           />
-        </Container>
+        </ContainerMobile>
       );
     }
 

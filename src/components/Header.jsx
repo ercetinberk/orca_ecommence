@@ -51,6 +51,7 @@ const LogoContainer = styled.div`
   color: #333;
   align-items: center;
   justify-content: center;
+  cursor: pointer;
 `;
 const LogoImage = styled.img`
   flex: 1;
@@ -94,12 +95,20 @@ const AccountInfo = styled.div`
   margin-left: 10px;
   letter-spacing: 1px;
   cursor: pointer;
+  & a {
+    color:black ;
+    text-decoration-line:none;
+  }
 `;
 //#endregion
 //#endregion
 function NavBar(props) {
   const navigate = useNavigate();
   const { width } = useWindowWidthAndHeight();
+  const applePlatform = window.navigator.platform.match(/Mac|iP(ad|hone)/);
+  const androidPlatform = window.navigator.platform.match(
+    /Mobile|mini|Fennec|Android|Linux/
+  );
   useEffect(() => {
     props.actions.getCartList();
   }, [props.actions]);
@@ -121,7 +130,13 @@ function NavBar(props) {
                 }}
               >
                 <GetAppRounded />
-                MY APP
+                {applePlatform ? (
+                <a href="https://apps.apple.com/tr/app/expo-foods-application/id1582599794">MY APP</a>
+              ) : (
+                androidPlatform && 
+                  <a href="https://play.google.com/store/apps/details?id=com.expofoodssalesapp">MY APP</a>
+                
+              )}
               </AccountInfo>
             {props.settings.intropage && (
               <AccountInfo
@@ -143,7 +158,7 @@ function NavBar(props) {
                   fontSize="0.8rem"
                   fontWeight="400"
                   right="3rem"
-                  top="5rem"
+                  top="4.8rem"
                   minHeight="10vh"
                   contentLinks={<AccountMenuContent />}
                 />
@@ -167,7 +182,7 @@ function NavBar(props) {
                   fontSize="0.8rem"
                   fontWeight="400"
                   right="1rem"
-                  top="5rem"
+                  top="4.8rem"
                   minHeight="50vh"
                   contentLinks={<CartMenuContent />}
                 />
@@ -204,7 +219,7 @@ function NavBar(props) {
                   fontSize="0.8rem"
                   fontWeight="400"
                   right="5.5rem"
-                  top="5rem"
+                  top="4.8rem"
                   minHeight="5vh"
                   contentLinks={<AccountMenuContent />}
                 />
@@ -219,7 +234,7 @@ function NavBar(props) {
                 fontSize="0.8rem"
                 fontWeight="400"
                 right="2rem"
-                top="5rem"
+                top="4.8rem"
                 minHeight="10vh"
                 contentLinks={<AboutMenuContent />}
               />
@@ -242,7 +257,7 @@ function NavBar(props) {
                   fontSize="0.8rem"
                   fontWeight="400"
                   right="1rem"
-                  top="5rem"
+                  top="4.8rem"
                   minHeight="50vh"
                   contentLinks={<CartMenuContent />}
                 />

@@ -14,7 +14,7 @@ const CartDiv = styled.div`
   min-height: 50vh;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: flex-start;
   color: #6e6e6e;
   font-size: 0.8rem;
   font-weight: 500;

@@ -5,6 +5,7 @@ import { bindActionCreators } from "redux";
 import * as userActions from "../../redux/actions/userActions";
 import useForm from "../../utilities/hooks/useForm";
 import {loginValidateInfo} from '../../utilities/helpers';
+import { useNavigate } from "react-router-dom";
 //#region STYLES
 
 const Container = styled.div`
@@ -53,6 +54,7 @@ const Button = styled.input`
   background-color: ${colors.primaryColor};
   color: white;
   margin-bottom: 10px;
+  cursor: pointer;
 `;
 const Link = styled.a`
   margin: 5px 0;
@@ -63,6 +65,7 @@ const Link = styled.a`
 //#endregion
 
 function Login(props) {
+  const navigate = useNavigate()
   const userLoginFunc = async (values) => {
     
     let user={
@@ -93,8 +96,8 @@ function Login(props) {
           <Input name="password" onChange={handleChange} type="password" placeholder="password" value={values.password}/>
           {errors.password && <p style={{color:'red'}}>{errors.password}</p>}
           <Button type="submit" value="Login"></Button>
-          <Link onClick={()=>{}}>FORGOT PASSWORD?</Link>
-          <Link>CREATE A NEW ACCOUNT</Link>
+          <Link onClick={(_) => navigate("/route=account/forgotPassword")}>FORGOT PASSWORD?</Link>
+          <Link onClick={(_) => navigate("/route=account/register")}>CREATE A NEW ACCOUNT</Link>
         </Form>
       </Wrapper>
     </Container>

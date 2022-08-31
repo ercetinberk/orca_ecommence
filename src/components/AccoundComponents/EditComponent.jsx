@@ -52,6 +52,7 @@ const Button = styled.input`
   padding: 15px;
   background-color: ${colors.primaryColor};
   color: white;
+  cursor: pointer;
 `;
 const Error = styled.div`
   text-align: center;

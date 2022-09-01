@@ -104,6 +104,7 @@ const WaitDiv = styled.div`
     margin-top:0.8rem ;
   }
   & h3 {
+    text-align:center ;
     margin-top:0.8rem ;
     color:${colors.primaryColor};
   }

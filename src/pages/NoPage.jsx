@@ -20,6 +20,11 @@ const Text = styled.span`
 
 `;
 function NoPage() {
+  window.scrollTo({
+    top: 0,
+    left: 0,
+    behavior: "smooth",
+  });
   return (
     <Container>
       <Label>404</Label>

@@ -7,6 +7,11 @@ import IntroContent from "../components/PagesComponents/IntroContent";
 import {API_URL} from "../res/values/values"
 const Container = styled.div``;
 const Intro = () => {
+  window.scrollTo({
+    top: 0,
+    left: 0,
+    behavior: "smooth",
+  });
   const sendMail = async (values)=>{
     let url = `${API_URL}/mail`;
     let rv = false

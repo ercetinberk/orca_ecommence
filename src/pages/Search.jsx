@@ -39,13 +39,24 @@ const Row = styled.div`
   justify-content: flex-start;
   padding: 10px;
   margin:10px ;
+  cursor: pointer;
   @media only screen and (min-width: 767px) {
     flex-direction: row;
   }
 `;
 const WaitDiv = styled.div`
+  display:flex ;
+  flex:1;
+  flex-direction:column ;
   align-items: center;
-  justify-content:center ;
+  justify-content: center;
+  & p {
+    margin-top:0.8rem ;
+  }
+  & h3 {
+    margin-top:0.8rem ;
+    color:${colors.primaryColor};
+  }
 `;
 const BreadCrumbTextHome = styled.a`
 font-size: 0.9rem;
@@ -106,6 +117,11 @@ function Saerch(props) {
   const [productDesc,setProductDesc]=useState('')
   const navigate = useNavigate();
   const { height } = useWindowWidthAndHeight();
+  window.scrollTo({
+    top: 0,
+    left: 0,
+    behavior: "smooth",
+  });
   useEffect(()=>{
     const renderPage = async ()=>{
       await props.actions.getSettings()

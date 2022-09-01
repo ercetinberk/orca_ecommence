@@ -1,3 +1,4 @@
+import { useState,forwardRef } from "react";
 import styled from "styled-components";
 import {colors,API_URL} from "../../res/values/values"
 import { connect } from "react-redux";
@@ -6,6 +7,12 @@ import * as userActions from "../../redux/actions/userActions";
 import useForm from "../../utilities/hooks/useForm";
 import {validateMailInfo} from '../../utilities/helpers';
 import { useNavigate } from "react-router-dom";
+
+import Snackbar from '@mui/material/Snackbar';
+import MuiAlert from '@mui/material/Alert';
+import Stack from '@mui/material/Stack';
+import MButton from '@mui/material/Button';
+
 //#region STYLES
 
 const Container = styled.div`
@@ -51,10 +58,26 @@ const Button = styled.input`
 
 //#endregion
 
+const Alert =forwardRef(function Alert(props, ref) {
+    return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+  });
+
 function ForgotPassword(props) {
   const navigate = useNavigate()
+  const [open, setOpen] = useState(false);
+
+  const handleClick = () => {
+    setOpen(true);
+  };
+
+  const handleClose = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+
+    setOpen(false);
+  };
   const forgotPasswordMail = async (values) => {
-    debugger
     let user={
       "mail":values.email,
     }
@@ -68,7 +91,8 @@ function ForgotPassword(props) {
     })
       .then((res) => res.json())
       .then((res) => {
-        console.log(res);
+        setOpen(true);
+        setTimeout(function() {navigate("/")}, 2000);
       })
       . catch((err) => {
         let error = JSON.parse(err.message);
@@ -91,6 +115,13 @@ function ForgotPassword(props) {
           <Button type="submit" value="Reset Password"></Button>
         </Form>
       </Wrapper>
+      <Stack spacing={2} sx={{ width: '100%' }}>
+      <Snackbar open={open} autoHideDuration={2000} onClose={handleClose}>
+        <Alert onClose={handleClose} severity="success" sx={{ width: '100%' }}>
+            Sending email successful !
+        </Alert>
+      </Snackbar>
+    </Stack>
     </Container>
   );
 }

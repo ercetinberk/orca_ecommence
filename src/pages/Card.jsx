@@ -38,10 +38,16 @@ const ContainerLoading = styled.div`
   min-height: 40vw;
 `;
 function Card(props) {
+
     const [loading,setLoading]=useState(true)
     const [currentProduct,setCurrentProduct]=useState({})
     let params = useParams();
     const { height } = useWindowWidthAndHeight();
+    window.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: "smooth",
+    });
   useEffect(()=>{
     const getProduct = async () => {
       let url = `${API_URL}/products/card/${params.productid}`

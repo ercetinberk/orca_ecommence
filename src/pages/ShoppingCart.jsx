@@ -17,6 +17,11 @@ const Container = styled.div`
 `;
 function ShoppingCart(props) {
   const { height } = useWindowWidthAndHeight();
+  window.scrollTo({
+    top: 0,
+    left: 0,
+    behavior: "smooth",
+  });
   useEffect(()=>{
     props.actions.getSettings()
   },[])

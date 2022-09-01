@@ -33,6 +33,7 @@ const Row = styled.div`
   justify-content: flex-start;
   padding: 10px;
   margin-top: 10px;
+  cursor: pointer;
   @media only screen and (min-width: 767px) {
     flex-direction: row;
   }
@@ -157,8 +158,18 @@ const DeliveryMethodDiv = styled.div`
   }
 `;
 const WaitDiv = styled.div`
+  display: flex;
+  flex: 1;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
+  & p {
+    margin-top: 0.8rem;
+  }
+  & h3 {
+    margin-top: 0.8rem;
+    color: ${colors.primaryColor};
+  }
 `;
 const DeliveryMethodButton = styled.div`
   font-size: 1.2rem;
@@ -358,8 +369,9 @@ function CardContent(props) {
           </OrcaModal>
           <OrcaModal isOpen={disableValue} onClose={() => setDisabled(false)}>
             <WaitDiv>
-              <CircularProgress size={40} thickness={4} />
-              <p>Please Wait ...</p>
+              <CircularProgress size={40} thickness={5} />
+              <h3>PROCESS CONTINUING</h3>
+              <p>Please wait ...</p>
             </WaitDiv>
           </OrcaModal>
           <Row>

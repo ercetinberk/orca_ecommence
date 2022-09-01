@@ -65,7 +65,6 @@ const QtyInput = styled.input`
     width: 15%;
   }
 `;
-
 const QtyButtons = styled.button`
   width: 30%;
   border: 1px solid lightgray;
@@ -86,6 +85,7 @@ const QtyButtons = styled.button`
     width: 20%;
   }
 `;
+
 const Image = styled.img`
   flex: 1;
   border-radius: 5px 5px 0 0;
@@ -95,8 +95,18 @@ const Image = styled.img`
   padding: 5px;
 `;
 const WaitDiv = styled.div`
+  display:flex ;
+  flex:1;
+  flex-direction:column ;
   align-items: center;
   justify-content: center;
+  & p {
+    margin-top:0.8rem ;
+  }
+  & h3 {
+    margin-top:0.8rem ;
+    color:${colors.primaryColor};
+  }
 `;
 //#endregion
 function ShoppingCartContentLine(props) {
@@ -160,8 +170,9 @@ function ShoppingCartContentLine(props) {
       <CartRow key={props.cartItem.id} productStock={props.cartItem.stockqty}>
           <OrcaModal isOpen={disableValue} onClose={() => setDisabled(false)}>
             <WaitDiv>
-              <CircularProgress size={40} thickness={4} />
-              <p>Please Wait ...</p>
+              <CircularProgress size={40} thickness={5} />
+              <h3>PROCESS CONTINUING</h3>
+              <p>Please wait ...</p>
             </WaitDiv>
           </OrcaModal>
           <CartRowCell style={{ textAlign: "center" }}>
@@ -181,6 +192,7 @@ function ShoppingCartContentLine(props) {
                   >
                     -
                   </QtyButtons>
+                  
                   <QtyInput
                     name="qtyinput"
                     onChange={onChangeHandler}
@@ -219,8 +231,9 @@ function ShoppingCartContentLine(props) {
       <CartRow key={props.cartItem.id} productStock={props.cartItem.stockqty}>
           <OrcaModal isOpen={disableValue} onClose={() => setDisabled(false)}>
             <WaitDiv>
-              <CircularProgress size={40} thickness={4} />
-              <p>Please Wait ...</p>
+              <CircularProgress size={40} thickness={5} />
+              <h3>PROCESS CONTINUING</h3>
+              <p>Please wait ...</p>
             </WaitDiv>
           </OrcaModal>
           <CartRowCell style={{ textAlign: "center" }}>
@@ -232,6 +245,7 @@ function ShoppingCartContentLine(props) {
           </CartRowCell>
 
           <CartRowCell style={{ textAlign: "center",alignItems:"center" }}>
+            
             <Divv>
               <QtyButtons
                 onClick={() => {
@@ -241,15 +255,13 @@ function ShoppingCartContentLine(props) {
                 -
               </QtyButtons>
               <QtyInput
-                name="qtyinput"
-                onChange={onChangeHandler}
-                type="number"
-                value={qtyValue}
-                disabled={disableValue}
-                ref={inputRef}
-              >
-                
-              </QtyInput>
+                    name="qtyinput"
+                    onChange={onChangeHandler}
+                    type="number"
+                    value={qtyValue}
+                    disabled={disableValue}
+                    ref={inputRef}
+                  />
               <QtyButtons
                 onClick={() => {
                   onButtonClickHandler(1, props.cartItem);

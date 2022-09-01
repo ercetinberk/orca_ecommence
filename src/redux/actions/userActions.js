@@ -112,7 +112,6 @@ export function changeDeliveryMethod(body,access_token) {
   };
 }
 export function changeDeliveryMethodApi(body,access_token) {
-  debugger
   let url = `${API_URL}/auth/updateDeliveryMethod`;
   //+(cartItem.id||"")
   return fetch(url, {

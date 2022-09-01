@@ -51,6 +51,11 @@ function MyAccount(props) {
   let params = useParams();
   const navigate = useNavigate();
   const { height } = useWindowWidthAndHeight();
+  window.scrollTo({
+    top: 0,
+    left: 0,
+    behavior: "smooth",
+  });
   useEffect(() => {
     const componentDidMount = async () => {
         await props.actions.getSettings();

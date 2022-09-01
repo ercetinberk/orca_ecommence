@@ -20,6 +20,7 @@ const Row = styled.div`
   border: 1px solid lightgray;
   padding: 5px;
   margin: 10px;
+  cursor: pointer;
   @media only screen and (min-width: 767px) {
   }
 `;

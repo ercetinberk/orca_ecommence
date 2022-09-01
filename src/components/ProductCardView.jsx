@@ -1,15 +1,15 @@
 import { Button, ButtonGroup } from "@material-ui/core";
 import { Add, Remove } from "@material-ui/icons";
 import styled from "styled-components";
-import { useState, useEffect,useRef } from "react";
+import { useState, useEffect, useRef } from "react";
 import { colors } from "../res/values/values";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import * as cartActions from "../redux/actions/cartActions";
 import * as userActions from "../redux/actions/userActions";
 import { useNavigate } from "react-router-dom";
-import CircularProgress from '@mui/material/CircularProgress';
-import OrcaModal from "./Modal/OrcaModal"
+import CircularProgress from "@mui/material/CircularProgress";
+import OrcaModal from "./Modal/OrcaModal";
 
 //#region Card styles
 const Container = styled.div`
@@ -32,7 +32,7 @@ const Container = styled.div`
 const Image = styled.img`
   height: 10rem;
   width: 10rem;
-  margin-top:0.5rem ;
+  margin-top: 0.5rem;
   min-height: 10rem;
   object-fit: contain;
 `;
@@ -102,22 +102,20 @@ const QtyInput = styled.input`
   padding-left: 5px;
   font-size: 1.1rem;
   text-align: center;
-  
 `;
 
 //#endregion
 //#region Ortak View
 const ProductInfo = styled.div`
-  font-weight:500 ;
-  font-size:0.7rem ;
+  font-weight: 500;
+  font-size: 0.7rem;
   position: absolute;
-  margin:0.1rem ;
+  margin: 0.1rem;
   top: 0;
   left: 0;
   z-index: 4;
   text-align: center;
-  box-shadow: ${(props) =>
-    props.type && "2px 2px rgba(0, 0, 0, 0.3)"};
+  box-shadow: ${(props) => props.type && "2px 2px rgba(0, 0, 0, 0.3)"};
   width: 2.5rem;
   height: 2.5rem;
   line-height: 2.5rem;
@@ -125,15 +123,18 @@ const ProductInfo = styled.div`
   -webkit-border-radius: 100%;
   overflow: hidden;
   text-overflow: ellipsis;
-  color: ${(props) =>
-    props.type === "" ? "transparent" :"#fff"};
+  color: ${(props) => (props.type === "" ? "transparent" : "#fff")};
   background-color: ${(props) =>
-    props.type === "" ? "transparent" :props.type==="sale" ? colors.salecolor:colors.weboffercolor };
+    props.type === ""
+      ? "transparent"
+      : props.type === "sale"
+      ? colors.salecolor
+      : colors.weboffercolor};
 `;
 const QuantityInfo = styled.div`
-  font-weight:500 ;
-  font-size:0.9rem ;
-  margin:0.1rem ;
+  font-weight: 500;
+  font-size: 0.9rem;
+  margin: 0.1rem;
   position: absolute;
   top: 0;
   right: 0;
@@ -146,33 +147,41 @@ const QuantityInfo = styled.div`
   border-radius: 100%;
   -webkit-border-radius: 100%;
   overflow: hidden;
-  color:white ;
+  color: white;
   background-color: ${colors.primaryColor};
 `;
 const DeliveryMethodDiv = styled.div`
   align-items: center;
-  width:20rem ;
+  width: 20rem;
   & div:hover {
-    background-color:  ${colors.primaryColor};
+    background-color: ${colors.primaryColor};
   }
 `;
 const WaitDiv = styled.div`
+  display: flex;
+  flex: 1;
+  flex-direction: column;
   align-items: center;
-  justify-content:center ;
-
+  justify-content: center;
+  & p {
+    margin-top: 0.8rem;
+  }
+  & h3 {
+    margin-top: 0.8rem;
+    color: ${colors.primaryColor};
+  }
 `;
 const DeliveryMethodButton = styled.div`
   font-size: 1.2rem;
   font-weight: 600;
   letter-spacing: 1px;
   align-items: center;
-  text-align:center ;
+  text-align: center;
   color: ${colors.whiteColor};
-  margin:1rem ;
+  margin: 1rem;
   padding: 5px;
   margin-top: 5px;
-  background-color:${colors.lightcolor} ;
-  
+  background-color: ${colors.lightcolor};
 `;
 //#endregion
 //#region List Styles
@@ -190,7 +199,6 @@ const ContainerListView = styled.div`
   &:hover {
     border: 1px solid ${colors.primaryColor};
   }
-  
 `;
 const ContentListView = styled.div`
   display: flex;
@@ -198,7 +206,7 @@ const ContentListView = styled.div`
   justify-content: flex-start;
   align-items: flex-start;
   transition: all 0.2s ease;
-  padding:0.5rem ;
+  padding: 0.5rem;
   @media only screen and (min-width: 920px) {
     flex-direction: row;
     align-items: center;
@@ -218,10 +226,10 @@ const DetailsListView = styled.div`
 const LeftContentListView = styled.div`
   display: flex;
   flex-direction: row;
-  justify-content:flex-start ;
-  align-items:flex-start ;
+  justify-content: flex-start;
+  align-items: flex-start;
   @media only screen and (min-width: 920px) {
-    width:70% ;
+    width: 70%;
   }
 `;
 const TitleListView = styled.span`
@@ -286,17 +294,17 @@ const QtyInputListView = styled.input`
   color: ${colors.primaryColor};
   padding-left: 5px;
   min-height: 2rem;
-  width:45% ;
+  width: 45%;
   font-size: 1.1rem;
   text-align: center;
   @media only screen and (min-width: 920px) {
-    width:5vh ;
+    width: 5vh;
   }
 `;
 //#endregion
 function ProductCardView(props) {
   const [qtyValue, setqtyValue] = useState(0);
-  
+
   const [disableValue, setDisabled] = useState(false);
   const navigate = useNavigate();
   const inputRef = useRef(null);
@@ -305,15 +313,17 @@ function ProductCardView(props) {
   const handleOpen = () => setOpen(true);
   const handleClose = () => {
     setOpen(false);
-    (disableValue) && setDisabled(false)
-  }
+    disableValue && setDisabled(false);
+  };
   const [delMethodQty, setDelMethodQty] = useState(0);
-  const [deliveryMethod, setDeliveryMethod] = useState('');
+  const [deliveryMethod, setDeliveryMethod] = useState("");
 
-  let addProductMethod = ''
+  let addProductMethod = "";
   useEffect(() => {
     let cartItem = props.cart.find((c) => c.itemno === props.product.itemno);
-    (props.cart.length > 0 )  ? setDeliveryMethod(props.cart[0].deliverymethod) : setDeliveryMethod('')
+    props.cart.length > 0
+      ? setDeliveryMethod(props.cart[0].deliverymethod)
+      : setDeliveryMethod("");
     if (cartItem) setqtyValue(cartItem.quantity);
     else setqtyValue(0);
   }, [props.cart, props.product.itemno]);
@@ -321,33 +331,48 @@ function ProductCardView(props) {
   const onButtonClickHandler = (quantity) => {
     const access_token = localStorage.getItem("access_token");
     if (access_token) {
-      addProductMethod='onClick'
-      if(deliveryMethod===''){
-        setDelMethodQty(quantity)
-        handleOpen()
-      }else{
-        addProductForButtonClick(quantity,deliveryMethod)
+      addProductMethod = "onClick";
+      if (deliveryMethod === "") {
+        setDelMethodQty(quantity);
+        handleOpen();
+      } else {
+        addProductForButtonClick(quantity, deliveryMethod);
       }
-      
     } else navigate("/route=account/login");
   };
-  const addProductForButtonClick = (quantity,method) =>{
+  const addProductForButtonClick = (quantity, method) => {
     if (quantity === -1) {
       if (qtyValue > 1) {
-        props.actions.addCartApi({ product: props.product, quantity: -1 ,deliveryMethod:method});
+        props.actions.addCartApi({
+          product: props.product,
+          quantity: -1,
+          deliveryMethod: method,
+        });
       } else if (qtyValue === 1) {
-        props.actions.addCartApi({ product: props.product, quantity: 0 ,deliveryMethod:method });
+        props.actions.addCartApi({
+          product: props.product,
+          quantity: 0,
+          deliveryMethod: method,
+        });
       }
     } else {
-      props.actions.addCartApi({ product: props.product, quantity: 1 ,deliveryMethod:method });
+      props.actions.addCartApi({
+        product: props.product,
+        quantity: 1,
+        deliveryMethod: method,
+      });
     }
-  }
-  const addProductForOnChangeHandler = async (quantity,deliveryMethod) =>{
-    setDisabled(true)
-    await props.actions.addCartApi({product: props.product,quantity,deliveryMethod});
-    setDisabled(false)
-    inputRef.current.focus()
-  }
+  };
+  const addProductForOnChangeHandler = async (quantity, deliveryMethod) => {
+    setDisabled(true);
+    await props.actions.addCartApi({
+      product: props.product,
+      quantity,
+      deliveryMethod,
+    });
+    setDisabled(false);
+    inputRef.current.focus();
+  };
   const onChangeHandler = async (event) => {
     let name = event.target.name;
     let value = event.target.value;
@@ -355,9 +380,9 @@ function ProductCardView(props) {
       case "qtyinput":
         const access_token = localStorage.getItem("access_token");
         if (access_token) {
-          addProductMethod='onChangeHandler'
+          addProductMethod = "onChangeHandler";
           if (value !== "") {
-            setqtyValue(value)
+            setqtyValue(value);
           } else {
             setqtyValue("");
           }
@@ -375,39 +400,43 @@ function ProductCardView(props) {
       case "qtyinput":
         const access_token = localStorage.getItem("access_token");
         if (access_token) {
-          addProductMethod='onChangeHandler'
+          addProductMethod = "onChangeHandler";
           if (value !== "") {
-    
-            
-            let newQty=parseInt(value)
-            let cartItem = props.cart.find((c) => c.itemno === props.product.itemno);
+            let newQty = parseInt(value);
+            let cartItem = props.cart.find(
+              (c) => c.itemno === props.product.itemno
+            );
             if (cartItem) {
               if (newQty === 0 || newQty < 0) {
-                setDisabled(true)
+                setDisabled(true);
                 await props.actions.removeFromCart(cartItem.id);
-                setDisabled(false)
+                setDisabled(false);
                 //inputRef.current.focus()
               } else {
-                setDisabled(true)
-                await props.actions.updateCartItem({cartItem: cartItem,quantity: parseInt(newQty)});
-                setDisabled(false)
+                setDisabled(true);
+                await props.actions.updateCartItem({
+                  cartItem: cartItem,
+                  quantity: parseInt(newQty),
+                });
+                setDisabled(false);
                 //inputRef.current.focus()
               }
             } else {
-              if (newQty > 0){
-                if(deliveryMethod===''){
-                  setDelMethodQty(parseInt(newQty))
-                  handleOpen()
-                }else{
-                  addProductForOnChangeHandler(parseInt(newQty),deliveryMethod)
+              if (newQty > 0) {
+                if (deliveryMethod === "") {
+                  setDelMethodQty(parseInt(newQty));
+                  handleOpen();
+                } else {
+                  addProductForOnChangeHandler(
+                    parseInt(newQty),
+                    deliveryMethod
+                  );
                 }
-              }
-              else{
-                setqtyValue(0)
-                setDisabled(false)
+              } else {
+                setqtyValue(0);
+                setDisabled(false);
                 //inputRef.current.focus()
               }
-                
             }
           } else {
             setqtyValue("");
@@ -419,225 +448,256 @@ function ProductCardView(props) {
       // code block
     }
   };
-  const changeDeliveryMethod =(method)=>{
-    (addProductMethod==='onClick') ? addProductForButtonClick(delMethodQty,method) : addProductForOnChangeHandler(delMethodQty,method)
-    handleClose()
-  }
+  const changeDeliveryMethod = (method) => {
+    addProductMethod === "onClick"
+      ? addProductForButtonClick(delMethodQty, method)
+      : addProductForOnChangeHandler(delMethodQty, method);
+    handleClose();
+  };
 
-  if(props.viewType === 'Grid' ){
+  if (props.viewType === "Grid") {
     return (
-        <Container qtyValue={qtyValue}>
-          <OrcaModal isOpen={open} onClose={handleClose}>
-            <DeliveryMethodDiv>
-                <DeliveryMethodButton onClick={()=>changeDeliveryMethod('Delivery')}>Delivery </DeliveryMethodButton>
-                <DeliveryMethodButton onClick={()=>changeDeliveryMethod('Collection')} >Collection </DeliveryMethodButton>
-            </DeliveryMethodDiv>
-          </OrcaModal>
-          <OrcaModal isOpen={disableValue} onClose={()=>setDisabled(false)}>
-            <WaitDiv>
-                  <CircularProgress
-                  size={40}
-                  thickness={4}
-            
-                />
-               <p>Please Wait ...</p>
-            </WaitDiv>
-          </OrcaModal>
-          {qtyValue > 0 && 
-            <QuantityInfo>{qtyValue}</QuantityInfo>
+      <Container qtyValue={qtyValue}>
+        <OrcaModal isOpen={open} onClose={handleClose}>
+          <DeliveryMethodDiv>
+            <DeliveryMethodButton
+              onClick={() => changeDeliveryMethod("Delivery")}
+            >
+              Delivery{" "}
+            </DeliveryMethodButton>
+            <DeliveryMethodButton
+              onClick={() => changeDeliveryMethod("Collection")}
+            >
+              Collection{" "}
+            </DeliveryMethodButton>
+          </DeliveryMethodDiv>
+        </OrcaModal>
+        <OrcaModal isOpen={disableValue} onClose={() => setDisabled(false)}>
+          <WaitDiv>
+            <CircularProgress size={40} thickness={5} />
+            <h3>PROCESS CONTINUING</h3>
+            <p>Please wait ...</p>
+          </WaitDiv>
+        </OrcaModal>
+        {qtyValue > 0 && <QuantityInfo>{qtyValue}</QuantityInfo>}
+
+        <ProductInfo
+          type={
+            props.product.itemprice - props.product.unitprice
+              ? "sale"
+              : props.product.weboffer > 0
+              ? "weboffer"
+              : ""
           }
-    
-          <ProductInfo type={(props.product.itemprice - props.product.unitprice)? "sale" :(props.product.weboffer>0 ? "weboffer":"")}>
-            {(props.product.itemprice - props.product.unitprice)? "SALE":(props.product.weboffer>0 ? "OFFER":"")}
-          </ProductInfo>
-          <Image
-            onClick={() => {
-              navigate(`/route=product/card/${props.product.itemno}`);
-            }}
-            src={`./${props.product.image}`}
-          />
-          <Details>
-            <Title>{props.product.description} </Title>
-            <CardProductInfo>
-              {(props.product.unitsize !== "" ) &&  props.product.packsize}*{( props.product.packsize !== "") &&  props.product.unitsize}
-            </CardProductInfo>
-            <CardProductInfo>Unit : {props.product.salesunit !== "" && props.product.salesunit}
-                  {props.product.vat > 0 && " "} {props.product.vat > 0 && "•"}  {props.product.vat > 0 && " "}
-                  {props.product.vat > 0 && "Vat: %"}
-                 {props.product.vat > 0 &&  props.product.vat}
-            </CardProductInfo>
-            <PriceDiv>
-              <Price>Col : £{props.product.unitprice}</Price>
-              <Price>Del : £{props.product.itemprice}</Price>
-            </PriceDiv>
-            <CartActions>
-              <QtyInput
-                name="qtyinput"
-                onChange={onChangeHandler}
-                onBlur={onBlurHandler}
-                type="number"
-                value={qtyValue}
-                disabled={disableValue}
-                ref={inputRef}
-              />
-              <ButtonGroup variant="outlined" aria-label="outlined button group">
-                <Button
-                  style={{ borderRadius: "1px" }}
-                  onClick={() => {
-                    onButtonClickHandler(-1);
+        >
+          {props.product.itemprice - props.product.unitprice
+            ? "SALE"
+            : props.product.weboffer > 0
+            ? "OFFER"
+            : ""}
+        </ProductInfo>
+        <Image
+          onClick={() => {
+            navigate(`/route=product/card/${props.product.itemno}`);
+          }}
+          src={`./${props.product.image}`}
+        />
+        <Details>
+          <Title>{props.product.description} </Title>
+          <CardProductInfo>
+            {props.product.unitsize !== "" && props.product.packsize}*
+            {props.product.packsize !== "" && props.product.unitsize}
+          </CardProductInfo>
+          <CardProductInfo>
+            Unit : {props.product.salesunit !== "" && props.product.salesunit}
+            {props.product.vat > 0 && " "} {props.product.vat > 0 && "•"}{" "}
+            {props.product.vat > 0 && " "}
+            {props.product.vat > 0 && "Vat: %"}
+            {props.product.vat > 0 && props.product.vat}
+          </CardProductInfo>
+          <PriceDiv>
+            <Price>Col : £{props.product.unitprice}</Price>
+            <Price>Del : £{props.product.itemprice}</Price>
+          </PriceDiv>
+          <CartActions>
+            <QtyInput
+              name="qtyinput"
+              onChange={onChangeHandler}
+              onBlur={onBlurHandler}
+              type="number"
+              value={qtyValue}
+              disabled={disableValue}
+              ref={inputRef}
+            />
+            <ButtonGroup variant="outlined" aria-label="outlined button group">
+              <Button
+                style={{ borderRadius: "1px" }}
+                onClick={() => {
+                  onButtonClickHandler(-1);
+                }}
+              >
+                <Remove
+                  style={{
+                    color: "black",
+                    flex: "1",
+                    height: "100%",
                   }}
-                >
-                  <Remove
-                    style={{
-                      color: "black",
-                      flex: "1",
-                      height: "100%",
-                    }}
-                  />
-                </Button>
-                <Button
-                  style={{ borderRadius: "1px" }}
-                  onClick={() => {
-                    onButtonClickHandler(1);
-                  }}
-                >
-                  <Add
-                    style={{
-                      color: "black",
-                      flex: "1",
-                      height: "100%",
-                    }}
-                  />
-                </Button>
-              </ButtonGroup>
-            </CartActions>
-            <StockDiv>
-              {props.product.stockqty > 0 ? (
-                <Stock stockqty={props.product.stockqty}>In Stock</Stock>
-              ) : (
-                <Stock stockqty={props.product.stockqty}>Out Of Stock</Stock>
-              )}
-            </StockDiv>
-          </Details>
-        </Container>
-      )
-  }else{
-    return (
-        <ContainerListView qtyValue={qtyValue}>
-          <OrcaModal isOpen={open} onClose={handleClose}>
-            <DeliveryMethodDiv>
-                <DeliveryMethodButton onClick={()=>changeDeliveryMethod('Delivery')}>Delivery </DeliveryMethodButton>
-                <DeliveryMethodButton onClick={()=>changeDeliveryMethod('Collection')} >Collection </DeliveryMethodButton>
-            </DeliveryMethodDiv>
-          </OrcaModal>
-          <OrcaModal isOpen={disableValue} onClose={()=>setDisabled(false)}>
-            <WaitDiv>
-                  <CircularProgress
-                  size={40}
-                  thickness={4}
-            
                 />
-               <p>Please Wait ...</p>
-            </WaitDiv>
-          </OrcaModal>
-          <ProductInfo type={(props.product.itemprice - props.product.unitprice)? "sale" :(props.product.weboffer>0 ? "weboffer":"")}>
-            {(props.product.itemprice - props.product.unitprice)? "SALE":(props.product.weboffer>0 ? "WEB OFFER":"")}
-          </ProductInfo>
-          <ContentListView>
-          
-            <LeftContentListView>
-            
+              </Button>
+              <Button
+                style={{ borderRadius: "1px" }}
+                onClick={() => {
+                  onButtonClickHandler(1);
+                }}
+              >
+                <Add
+                  style={{
+                    color: "black",
+                    flex: "1",
+                    height: "100%",
+                  }}
+                />
+              </Button>
+            </ButtonGroup>
+          </CartActions>
+          <StockDiv>
+            {props.product.stockqty > 0 ? (
+              <Stock stockqty={props.product.stockqty}>In Stock</Stock>
+            ) : (
+              <Stock stockqty={props.product.stockqty}>Out Of Stock</Stock>
+            )}
+          </StockDiv>
+        </Details>
+      </Container>
+    );
+  } else {
+    return (
+      <ContainerListView qtyValue={qtyValue}>
+        <OrcaModal isOpen={open} onClose={handleClose}>
+          <DeliveryMethodDiv>
+            <DeliveryMethodButton
+              onClick={() => changeDeliveryMethod("Delivery")}
+            >
+              Delivery{" "}
+            </DeliveryMethodButton>
+            <DeliveryMethodButton
+              onClick={() => changeDeliveryMethod("Collection")}
+            >
+              Collection{" "}
+            </DeliveryMethodButton>
+          </DeliveryMethodDiv>
+        </OrcaModal>
+        <OrcaModal isOpen={disableValue} onClose={() => setDisabled(false)}>
+          <WaitDiv>
+            <CircularProgress size={40} thickness={5} />
+            <h3>PROCESS CONTINUING</h3>
+            <p>Please wait ...</p>
+          </WaitDiv>
+        </OrcaModal>
+        <ProductInfo
+          type={
+            props.product.itemprice - props.product.unitprice
+              ? "sale"
+              : props.product.weboffer > 0
+              ? "weboffer"
+              : ""
+          }
+        >
+          {props.product.itemprice - props.product.unitprice
+            ? "SALE"
+            : props.product.weboffer > 0
+            ? "WEB OFFER"
+            : ""}
+        </ProductInfo>
+        <ContentListView>
+          <LeftContentListView>
             <ImageListView
               onClick={() => {
                 navigate(`/route=product/card/${props.product.itemno}`);
               }}
               src={`./${props.product.image}`}
             />
-           
-              <DetailsListView>
+
+            <DetailsListView>
               <TitleListView>{props.product.description}</TitleListView>
-                <ProductInformationListView>
-                  Size :  {(props.product.unitsize !== "" ) &&  props.product.packsize}
-                  *{( props.product.packsize !== "") &&  props.product.unitsize}
-                  {" "} • {" "}
-                  Unit : {props.product.salesunit !== "" && props.product.salesunit}
-                  {" "} • {" "}
-                  Vat % :{props.product.vat > 0 && props.product.vat}
-                  {" "} • {" "}
-                  Stock Qty : {props.product.stockqty > 0 && props.product.stockqty}
-                </ProductInformationListView>
-                {props.product.stockqty > 0 ? (
-                  <InfoView border={true}>
-                    <InfoTextListView
-                      style={{
-                        color: "darkgreen",
-                        textAlign: "right",
-                        fontWeight: "500",
-                      }}
-                    >
-                      In Stock
-                    </InfoTextListView>
-                  </InfoView>
-                ) : (
-                  <InfoView border={true}>
-                    <InfoTextListView
-                      style={{
-                        color: "darkred",
-                        textAlign: "right",
-                        fontWeight: "500",
-                      }}
-                    >
-                      Out Of Stock
-                    </InfoTextListView>
-                  </InfoView>
-                )}
-                {props.settings.pricevisible && (
-                  <PriceDivListView>
-                    <PriceListView>£ {props.product.unitprice}</PriceListView>
-                    {props.product.itemprice - props.product.unitprice > 0 && (
-                      <OldPriceListView>£ {props.product.itemprice}</OldPriceListView>
-                    )}
-                  </PriceDivListView>
-                )}
-              </DetailsListView>
-             
-            </LeftContentListView>
-            <CartActionsListView>
-                <Button
-                  style={{ border: "1px solid lightgray", borderRadius: "0" }}
-                  onClick={() => {
-                    onButtonClickHandler(-1);
-                  }}
-                >
-                  <Remove style={{ color: colors.primaryColor }} />
-                </Button>
-                
-                <QtyInputListView 
-                name="qtyinput"
-                onChange={onChangeHandler}
-                onBlur={onBlurHandler}
-                type="number"
-                value={qtyValue}
-                disabled={disableValue}
-                ref={inputRef} />
-                
-                <Button
-                  style={{ border: "1px solid lightgray", borderRadius: "0" }}
-                  onClick={() => {
-                    onButtonClickHandler(1);
-                  }}
-                >
-                  <Add style={{ color: colors.primaryColor }} />
-                </Button>
-                
-              </CartActionsListView>
-            
-          </ContentListView>
-          {qtyValue > 0 && 
-            <QuantityInfo>{qtyValue}</QuantityInfo>
-          }
-        </ContainerListView>
-      )
+              <ProductInformationListView>
+                Size : {props.product.unitsize !== "" && props.product.packsize}
+                *{props.product.packsize !== "" && props.product.unitsize} •{" "}
+                Unit :{" "}
+                {props.product.salesunit !== "" && props.product.salesunit} •{" "}
+                Vat % :{props.product.vat > 0 && props.product.vat} • Stock Qty
+                : {props.product.stockqty > 0 && props.product.stockqty}
+              </ProductInformationListView>
+              {props.product.stockqty > 0 ? (
+                <InfoView border={true}>
+                  <InfoTextListView
+                    style={{
+                      color: "darkgreen",
+                      textAlign: "right",
+                      fontWeight: "500",
+                    }}
+                  >
+                    In Stock
+                  </InfoTextListView>
+                </InfoView>
+              ) : (
+                <InfoView border={true}>
+                  <InfoTextListView
+                    style={{
+                      color: "darkred",
+                      textAlign: "right",
+                      fontWeight: "500",
+                    }}
+                  >
+                    Out Of Stock
+                  </InfoTextListView>
+                </InfoView>
+              )}
+              {props.settings.pricevisible && (
+                <PriceDivListView>
+                  <PriceListView>£ {props.product.unitprice}</PriceListView>
+                  {props.product.itemprice - props.product.unitprice > 0 && (
+                    <OldPriceListView>
+                      £ {props.product.itemprice}
+                    </OldPriceListView>
+                  )}
+                </PriceDivListView>
+              )}
+            </DetailsListView>
+          </LeftContentListView>
+          <CartActionsListView>
+            <Button
+              style={{ border: "1px solid lightgray", borderRadius: "0" }}
+              onClick={() => {
+                onButtonClickHandler(-1);
+              }}
+            >
+              <Remove style={{ color: colors.primaryColor }} />
+            </Button>
+
+            <QtyInputListView
+              name="qtyinput"
+              onChange={onChangeHandler}
+              onBlur={onBlurHandler}
+              type="number"
+              value={qtyValue}
+              disabled={disableValue}
+              ref={inputRef}
+            />
+
+            <Button
+              style={{ border: "1px solid lightgray", borderRadius: "0" }}
+              onClick={() => {
+                onButtonClickHandler(1);
+              }}
+            >
+              <Add style={{ color: colors.primaryColor }} />
+            </Button>
+          </CartActionsListView>
+        </ContentListView>
+        {qtyValue > 0 && <QuantityInfo>{qtyValue}</QuantityInfo>}
+      </ContainerListView>
+    );
   }
 }
 function mapDispatchToProps(dispatch) {
@@ -646,7 +706,10 @@ function mapDispatchToProps(dispatch) {
       addCartApi: bindActionCreators(cartActions.addCart, dispatch),
       updateCartItem: bindActionCreators(cartActions.updateCartItem, dispatch),
       removeFromCart: bindActionCreators(cartActions.removeFromCart, dispatch),
-      changeDeliveryMethod: bindActionCreators(userActions.changeDeliveryMethod, dispatch),
+      changeDeliveryMethod: bindActionCreators(
+        userActions.changeDeliveryMethod,
+        dispatch
+      ),
     },
   };
 }

@@ -70,7 +70,6 @@ function CheckOutContent(props) {
       const access_token = localStorage.getItem("access_token");
       if (access_token) await props.actions.getUser();
       setLoading(false);
-      debugger
     }
     getAPI()
     return  () => {
@@ -121,7 +120,7 @@ function CheckOutContent(props) {
       .then((res) => res.json())
       .then((res) => {
         if(res.success)  
-          navigate('/')  
+          navigate("/route=account/order") 
         else{
           setCheckOutError(res.message)
           if(res.message === "You are not authorization to access this route"){
@@ -138,7 +137,6 @@ function CheckOutContent(props) {
     }
   };
   const confirmOrderWithPayment = async () => {
-    debugger
     let user ={
       id:props.currentUser.id,
       customerno:props.currentUser.customerno,

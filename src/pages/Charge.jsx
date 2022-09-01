@@ -33,6 +33,11 @@ const Charge = ({totalPayment,confirmOrderWithPayment,user}) => {
   const appearance = {
     theme: "stripe",
   };
+  window.scrollTo({
+    top: 0,
+    left: 0,
+    behavior: "smooth",
+  });
   useEffect(() => {
     const getClinetSecret = async () => {
       try {

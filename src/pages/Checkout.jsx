@@ -13,6 +13,11 @@ const Container = styled.div`
 `;
 function Checkout() {
   const { height } = useWindowWidthAndHeight();
+  window.scrollTo({
+    top: 0,
+    left: 0,
+    behavior: "smooth",
+  });
   return (
     <Container height={height}>
       <div>

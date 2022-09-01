@@ -21,6 +21,8 @@ import OrcaBottomModal from "./components/Modal/OrcaBottomModal";
 import styled from "styled-components";
 import {colors} from "./res/values/values"
 
+
+
 const LogoContainer = styled.div`
   display:flex ;
   flex:1;
